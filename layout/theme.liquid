@@ -84,7 +84,9 @@
 
     document.documentElement.className = document.documentElement.className.replace('supports-no-js', '');
   </script>
-
+  
+  {{ 'custom.css' | asset_url | stylesheet_tag }}
+  
   <script src="{{ 'lazysizes.min.js' | asset_url }}" async="async"></script>
   <script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
