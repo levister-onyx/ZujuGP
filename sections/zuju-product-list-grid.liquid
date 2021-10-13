@@ -1,0 +1,46 @@
+<div class="product_grid">
+  <div class="product_grid__title">
+    <h1>Don't miss out on this exclusive products</h1>
+  </div>
+  
+  <div class="product_grid__items">
+    <p>below are the specified product in 3x3</p>
+    {{product}}
+  </div>
+
+
+</div>
+
+{% schema %}
+  {
+    "name": "Zuju Product List Grid",
+    "settings": [],
+    "presets": [
+    {
+      "name": "Zuju Product Grid",
+      "category": "Layout"
+    }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.product_grid{
+  padding: 50px 0;
+}
+
+.product_grid__title > h1{
+  text-align:center;
+  color: #fff;
+}
+
+.product_grid__items{
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  margin: 30px auto;
+}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

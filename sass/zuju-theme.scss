@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "GT-America-Condensed-Bold";
+    src: url('GT-America-Condensed-Bold.woff2') format("woff2"),
+    url('GT-America-Condensed-Bold.woff') format("woff");
+}
+
+$zujuFont: "GT-America-Condensed-Bold";
+
+h1{
+    font-family: $zujuFont;
+    font-size: 5rem;
+    line-height: 4rem;
+}
+
+h2{
+    font-family: $zujuFont;
+    font-size: 3rem;
+    line-height: 3.5rem;
+}
+
+h3{
+    font-family: $zujuFont;
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+
+h4{
+    font-family: $zujuFont;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
