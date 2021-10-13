@@ -1,0 +1,281 @@
+/*Load from Hubspot*/
+
+@font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Thin.woff) format("woff");
+    font-weight: 100;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Thin-Italic.woff) format("woff");
+    font-weight: 100;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Ultra-Light.woff) format("woff");
+    font-weight: 200;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Ultra-Light-Italic.woff) format("woff");
+    font-weight: 200;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Light.woff) format("woff");
+    font-weight: 300;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Light-Italic.woff) format("woff");
+    font-weight: 300;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Regular.woff) format("woff");
+    font-weight: normal;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Regular-Italic.woff) format("woff");
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Medium.woff) format("woff");
+    font-weight: 500;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Medium-Italic.woff) format("woff");
+    font-weight: 500;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Bold.woff) format("woff");
+    font-weight: bold;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Bold-Italic.woff) format("woff");
+    font-weight: bold;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Black.woff) format("woff");
+    font-weight: 900;
+  }
+  @font-face {
+    font-family: "GT America Compressed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-compressed/GT-America-Compressed-Black-Italic.woff) format("woff");
+    font-weight: 900;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Thin.woff) format("woff");
+    font-weight: 100;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Thin-Italic.woff) format("woff");
+    font-weight: 100;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Ultra-Light.woff) format("woff");
+    font-weight: 200;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Ultra-Light-Italic.woff) format("woff");
+    font-weight: 200;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Light.woff) format("woff");
+    font-weight: 300;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Light-Italic.woff) format("woff");
+    font-weight: 300;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Regular.woff) format("woff");
+    font-weight: normal;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Regular-Italic.woff) format("woff");
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Medium.woff) format("woff");
+    font-weight: 500;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Medium-Italic.woff) format("woff");
+    font-weight: 500;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Bold.woff) format("woff");
+    font-weight: bold;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Bold-Italic.woff) format("woff");
+    font-weight: bold;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Black.woff) format("woff");
+    font-weight: 900;
+  }
+  @font-face {
+    font-family: "GT America Condensed";
+    src: url(https://www.zujugp.com/hubfs/statics/fonts/gt-america-condensed/GT-America-Condensed-Black-Italic.woff) format("woff");
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  /*End Load from Hubspot*/
+
+@font-face {
+    font-family: "GT-America-Condensed-Bold";
+    src: url('GT-America-Condensed-Bold.woff2') format("woff2"),
+    url('GT-America-Condensed-Bold.woff') format("woff");
+}
+
+@font-face {
+    font-family: "GT-America-Condensed-Black";
+    src: url('GT-America-Condensed-Black.otf') format("opentype"),
+    url('GT-America-Condensed-Black.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: "GT-America-Condensed-Light";
+    src: url('GT-America-Condensed-Light.woff2') format("woff2"),
+    url('GT-America-Condensed-Light.woff') format("woff");
+}
+
+@font-face {
+    font-family: "GT-America-Standard-Regular";
+    src: url('GT-America-Standard-Regular.woff2') format("woff2"),
+    url('GT-America-Standard-Regular.woff') format("woff");
+}
+
+
+
+
+$zujuStandard: "GT-America-Standard-Regular";
+$zujuCondensed: "GT America Condensed";
+$zujuBold: "GT-America-Condensed-Bold";
+$zujuBlack: "GT-America-Condensed-Black";
+$zujuLight: "GT-America-Condensed-Light";
+
+
+html{
+	line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+	font-size: 16px;
+}
+
+body{
+	font-size: 16px;
+  line-height: 1.5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #000;
+	font-family: "Montserrat";
+}
+
+h1, .h1{
+		font-family: $zujuBlack;
+    font-size: 64px;
+    line-height: 64px;
+    color: #fff;
+}
+
+h2, .h2{
+		font-family: $zujuBlack;
+    font-size: 48px;
+    line-height: 56px;
+    color: #fff;
+}
+
+h3, .h3{
+		font-family: $zujuBlack;
+    font-size: 32px;
+    line-height: 40px;
+    color: #fff;
+}
+
+h4, .h4{
+		font-family: $zujuBlack;
+    font-size: 24px;
+    line-height: 32px;
+    color: #fff;
+}
+
+h5, .h5{
+	font-size: 20px;
+	line-height: 20px;
+	color: #fff;
+}
+
+p, .p{
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+}
+
+@include media("<=tablet"){
+	h1, .h1{
+    font-size: 48px;
+    line-height: 48px;
+    color: #fff;
+	}
+
+	h2, .h2{
+			font-size: 32px;
+			line-height: 40px;
+			color: #fff;
+	}
+
+	h3, .h3{
+			font-size: 24px;
+			line-height: 32px;
+			color: #fff;
+	}
+
+	h5, .h5{
+		font-size: 16px;
+		line-height: 20px;
+		color: #fff;
+	}
+}
+
+a {
+    color: var(--clr-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--clr-primary);
+    text-underline-offset: 3px;
+    transition: opacity 0.3s ease;
+  }

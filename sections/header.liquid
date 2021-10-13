@@ -222,6 +222,15 @@
           <span class="site-header__cart-bubble{% if cart.item_count > 0 %} site-header__cart-bubble--visible{% endif %}"></span>
         </a>
       </div>
+
+
+      <div class="site-header__section site-header__section--button language_selector_zuju">
+        {% form 'currency' %}
+        {{ form | currency_selector }}
+        {% endform %}
+      </div>
+
+
     </div>
   </header>
 </div>

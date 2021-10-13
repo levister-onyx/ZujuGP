@@ -1,0 +1,22 @@
+<div class="currency_selector_zuju">
+	{% form 'localization', id:"localization_form_tag", class:"dropup" %}
+		<select name="localeItem" id="localeItem">
+			{% for locale in shop.published_locales %}
+				<option value="{{locale.iso_code}}" {%if form.current_locale.endonym_name == locale.endonym_name %} selected {%endif%}>{{locale.endonym_name}}</option>
+			{% endfor %}
+		</select>
+		<input type="hidden" name="locale_code" value="{{form.current_locale.iso_code}}" id="localeCode" />
+	{% endform %}
+
+	{% form 'currency' %}
+	{{ form | currency_selector }}
+	{% endform %}
+</div>
+		<script>
+			document.querySelectorAll('#localeItem').forEach(item => {
+				item.addEventListener("change", event => {
+					document.getElementById("localeCode").value = document.getElementById("localeItem").value;
+					document.getElementById("localization_form_tag").submit();
+				});
+			});
+		</script>

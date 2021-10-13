@@ -1,0 +1,88 @@
+<style>
+.scrollContent{
+  background: url("{{ 'shopify-masthead.jpg' | asset_url }}") no-repeat fixed center;
+  background-color: #000;
+  object-fit: contain;
+  object-position: center;
+	overflow: hidden;
+	background-size: cover;
+}
+</style>
+{% assign myLang = request.locale.iso_code %}
+
+<div id="content-wrapper">
+
+    <section class="scrollContent">     
+          
+      <section class="panel" id="doors">
+          <div class="splashTitle">
+						{% case myLang %}
+						{% when "zh-CN" %}
+							<h2 class="h2">点击进入礼物页面</h2>
+							<h4 class="h4 splashTitle__minitext">滚动进入</h4>
+							<p style="color: whitesmoke"><i class="fas fa-chevron-down fa-4x bounce"></i></p>
+						{% else %}
+							<h2 class="h2">ENTER THE CHAMBERS <BR> OF COOL GIFTS</h2>
+							<h4 class="h4 splashTitle__minitext">SCROLL<br> TO ENTER</h4>
+							<p style="color: whitesmoke"><i class="fas fa-chevron-down fa-4x bounce"></i></p>
+						{% endcase %}
+          </div>
+          <img src="{{ 'door-left.jpg' | asset_url }}" class="doorLeft">
+          <img src="{{ 'door-right.jpg' | asset_url }}" class="doorRight">
+      </section>
+      
+      <section class="panel" id="doors_opened">
+				<audio class="audio" src="{{ 'gong.mp3' | asset_url }}" preload="auto"></audio>
+        <div class="splashText">
+          <h1 class="h1">{{ section.settings.open_door_title }}</h1>
+          <h3 class="h3 splashText__minitext">
+            {{ section.settings.open_door_title_info }}
+          </h3>
+        </div>
+      </section>
+
+    </section>
+</div>
+
+<script src="{{ 'doors.js' | asset_url }}"></script>
+
+{% schema %}
+  {
+    "name": "Zuju Splash Intro",
+    "settings": [
+		{
+			"type":"text",
+			"id":"open_door_title",
+			"label": {
+				"en": "Opened Door Message"
+			},
+			"default": "One-off items in impossibly limited runs BUY!"
+		},
+		{
+			"type":"text",
+			"id":"open_door_title_info",
+			"label": {
+				"en": "Opened Door Info"
+			},
+			"default": "Before you miss out"
+		}
+		
+		],
+    "presets": [
+    {
+      "name": "Zuju Splash Intro",
+      "category": "Layout"
+    }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.content-wrapper{
+  background-color: #000;
+}
+
+{% endstylesheet %}
+
+{% javascript %} 
+{% endjavascript %}

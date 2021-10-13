@@ -1,0 +1,124 @@
+.product{
+	
+	&__title__zuju{
+			font-family: $zujuBlack;
+	}
+
+	&__price{
+		margin-top: 40px;
+	}
+
+	&__current-price__zuju{
+			font-family: $zujuBlack;
+	}
+
+	&__description{
+
+		width: unset;
+
+		&-info{
+			color: #fff;
+		}
+		
+		&-weight{
+			margin-bottom: 20px;
+			display: flex;
+			flex-direction: row;
+			align-items: end;
+			justify-content: space-between;
+
+			&-label{
+				color: #fff;
+				font-family: $zujuBlack;
+				font-size: 24px;
+				line-height: 32px;
+			}
+
+			&-value{
+				color: #fff;
+				font-size: 24px;
+				letter-spacing: 0;
+				line-height: 32px;
+			}
+		}
+	}
+
+	&__content-main{
+		flex-direction: row;
+
+		.page-left, .page-right{
+			flex: 1 0 50%;
+			width: 100%!important;
+		}
+
+		.page-left{
+			padding-right: 20px;
+		}
+
+		.page-right{
+			padding-left: 20px;
+			.product__form-container{
+				margin: unset;
+			}
+		}
+	}
+
+	&__media-container{
+			margin-top: unset;
+	}
+
+	&__form-container{
+		width: unset;
+	}
+
+	@include media("<=425px"){
+
+		&__content-main{
+			flex-direction: column;
+		
+			.page-left, .page-right{
+				padding-left: unset;
+				padding-right: unset;
+			}
+
+			.page-right{
+				margin-top: 60px;
+				.product__form-container{
+					margin: auto;
+				}
+			}
+		}
+
+		&__description{
+			text-align: center;
+		}
+	}
+}
+
+label{
+	&.product-form__quantity-label{
+		border-right: none;
+	}
+
+	&.single-option-selector__label{
+		color: #fff;
+		font-size: 16px;
+		line-height: 24px;
+	}
+}
+
+select.single-option-selector{
+	font-size: 16px;
+	line-height: 24px;
+	color: #fff;
+	border: 1px solid #474747;
+	background-color: #222022;
+	box-sizing: border-box;
+}
+
+input.product-form__quantity-input, .product-form__quantity-label{
+	color: #fff;
+	border: 1px solid #474747;
+	background-color: #222022;
+	box-sizing: border-box;
+}

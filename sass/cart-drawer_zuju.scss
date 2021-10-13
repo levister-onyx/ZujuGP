@@ -1,0 +1,70 @@
+.cart-drawer{
+    &__header{
+      max-height: 60px;
+			&-title{
+				font-family: $zujuBlack;
+				font-size: 16px;
+			}
+
+			&-container{
+				.cart-drawer__close-button svg.icon{
+					fill: #fff;
+					width: 25px;
+				}
+			}
+    }
+
+    &__header_zuju{
+        background: #eb4f47;
+        border-left: 1px solid #474742;
+        border-bottom: 1px solid #474742;
+
+    }
+
+    &_zuju, &__footer{
+        background-color: #1E1C1D;
+    }
+
+		&__item{
+			&-content{
+				font-size: 16px!important;
+			}
+
+			&-title{
+				font-family: $zujuBlack;
+			}
+
+			&-delete.btn-link{
+				color:#eb4f47!important;
+				//font-family: $zujuBlack;
+				font-size: 16px;
+			}
+
+			&-quantity{
+				font-size: 15px!important;
+				width: 60px!important;
+			}
+			.transcy-money{
+				font-size: 16px;
+			}
+		}
+
+		&__footer{
+			.cart-drawer__subtotal-label span.h4{
+				font-family: $zujuBlack;
+				font-size: 20px;
+			}
+			.cart-drawer__subtotal-number{
+				color: #fff;
+			}
+
+			&-container p.cart-drawer__disclaimer{
+				font-family: $zujuLight;
+				font-size: 1.1rem;
+			}
+		}
+
+		&__checkout{
+			font-size: 12px;
+		}
+}

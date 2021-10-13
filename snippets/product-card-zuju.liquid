@@ -1,0 +1,80 @@
+<div class="card critical-clear" id="Card-{{ product.id }}" data-animate>
+    <a href="{{ product.url }}" class="card__wrapper{% if section.settings.show_spacing %} card__wrapper--padding{% endif %} text-center card__zuju">
+			<h4 class="card__name h4 zuju_product_title">{{ product.title }}</h4>
+			
+      {% if product.featured_media %}
+        {% include 'card-image', type: product.featured_media.preview_image, grid_style: grid_style %}
+      {% endif %}
+  
+      <div class="card__info{% if grid_style == 'grid' %} card__info--aligned{% endif %} card__info__zuju">
+        
+				{% if section.settings.show_vendor %}
+          <div class="card__brand">{{ product.vendor }}</div>
+        {% endif %}
+				
+				{%comment%}
+        {% if product.available %}
+					add condition for product availability
+				{% else %}
+					
+          <div class="card__availability">
+            {{ 'products.product.sold_out' | t }}
+          </div>
+					
+        {% endif %}
+				{%endcomment%}
+
+      </div>
+		</a>
+
+			<div class="btn__more__zuju__wrapper">
+				<div class="card__price" style="color: #fff">
+					{%- assign variant = product.selected_or_first_available_variant %}
+					{% if product.compare_at_price > product.price %}
+						{% comment %}
+							Product is on sale
+						{% endcomment %}
+						{% if product.price_varies %}
+							{% assign sale_price = product.price | money_without_trailing_zeros %}
+							<span class="visually-hidden"> {{ 'products.product.price' | t }} </span>
+							{{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+						{% else %}
+							<span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+							<span class="card__price--sale">{{ product.price | money_without_trailing_zeros }}</span>
+
+							<span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+							<span class="card__price--regular-strike">
+								<span class="card__price--regular">{{ product.compare_at_price | money_without_trailing_zeros }}</span>
+							</span>
+							{%- if variant.available and variant.unit_price_measurement -%}
+								{% include 'product-unit-price', variant: variant %}
+							{% endif %}
+						{% endif %}
+
+					{% else %}
+						{% comment %}
+							Not on sale, but could still have varying prices
+						{% endcomment %}
+						{% if product.price_varies %}
+							{% assign price = product.price | money_without_trailing_zeros %}
+							{{ 'products.product.from_text_html' | t: price: price }}
+						{% else %}
+							{{ product.price | money_without_trailing_zeros }}
+							{%- if variant.available and variant.unit_price_measurement -%}
+								{% include 'product-unit-price', variant: variant %}
+							{% endif %}
+						{% endif %}
+					{% endif %}
+				</div>
+				<button class="btn__more__zuju" onclick="window.location.href='{{ product.url }}'"> {{btn_label}} </button>
+			</div>
+
+      {% if product.compare_at_price > product.price %}
+        {% assign sale_text_length = 'products.product.on_sale' | t | size %}
+        <span class="card__badge{% if sale_text_length > 6 %} card__badge--large{% endif %}">
+          {{ 'products.product.on_sale' | t }}
+        </span>
+      {% endif %}
+    
+</div>
+  

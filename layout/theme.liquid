@@ -8,7 +8,7 @@
 {% endif %}
 
 <!doctype html>
-<html class="supports-no-js {% if hide_footer %} site-footer--hidden{% endif %}" lang="{{ request.locale.iso_code }}">
+<html class="supports-no-js {% if hide_footer %} site-footer--hidden{% endif %}" lang="{{ request.locale.iso_code }}" fontify-lang="{{ shop.locale }}">
 <head>
   <meta charset="utf-8">
 
@@ -32,7 +32,8 @@
   {% include 'social-meta-tags' %}
   {% render 'css-variables' %}
 
-  {{ content_for_header }}
+  {{ content_for_header }} 
+ {{ shop.metafields.fontify.stylesheets }}
 
   {% include 'critical-css' %}
   {% include 'load-css' %}
@@ -90,27 +91,52 @@
   <script src="{{ 'lazysizes.min.js' | asset_url }}" async="async"></script>
   <script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,400;1,700&family=Roboto+Condensed:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
   
+  <!-- Animation -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.1/gsap.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/debug.addIndicators.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.6.3/smooth-scrollbar.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.6.3/plugins/overscroll.js"></script>
+  <!-- End Animation -->
+  <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{% if request.page_type != blank %}{{ request.page_type | handle }}{% else %}none{% endif %} data-animations">
 
   <a class="visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
-
-  {% section 'header' %}
+  {%comment%}
+    {% section 'header' %}
+      {%section 'header_zuju'%}
+  {%endcomment%}
+  
+  {% section 'header_zuju' %}
 
   <div class="main-content{% if request.page_type == blank %} main-content--no-template{% endif %}" data-drawer-push>
     <div class="main-content__wrapper">
       <main class="content-for-layout" id="MainContent" role="main">
         {{ content_for_layout }}
       </main>
-
-      {% section 'footer' %}
+			  {%comment%}
+      	{% section 'footer' %}
+				{%endcomment%}
+				{% section 'footer_zuju' %}
     </div>
   </div>
+  {%comment%}
+    {% include 'cart-drawer' %}
+  {%endcomment%}
 
-  {% include 'cart-drawer' %}
+  {% include 'cart-drawer_zuju' %}
+  
   <ul hidden>
     <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
     <li id="a11y-selection-message">{{ 'general.accessibility.selection_help' | t }}</li>

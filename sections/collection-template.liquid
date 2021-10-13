@@ -18,7 +18,7 @@
     <div class="grid text-center">
       <div class="grid__item medium-up--ten-twelfths medium-up--push-one-twelfth">
         <header class="section-header">
-          <h1 class="section-header__title h2">{{ collection.title }}</h1>
+          <h2 class="section-header__title h2 section-header__title_zuju ">{{ collection.title }}</h2>
           {% if collection.description != blank %}
             <div class="section-header__description rte">
               {{ collection.description }}
@@ -73,7 +73,10 @@
     <div class="card-list grid" data-desktop-columns="{{ desktopColumns }}" data-mobile-columns="{{ mobileColumns }}" data-grid-style="{{ section.settings.grid_style }}">
       <div class="card-list__column{% if totalProducts == 1 %} card-list__column--center{% endif %} grid grid__item {{ gridClasses }}">
         {% for product in collection.products %}
-          {% include 'product-card', product: product, grid_style: section.settings.grid_style %}
+          {%comment%}
+            {% include 'product-card', product: product, grid_style: section.settings.grid_style %}
+          {%endcomment%}
+          {% include 'product-card-zuju', product: product, grid_style: section.settings.grid_style, btn_label:section.settings.btn_label %}
         {% endfor %}
       </div>
     </div>
@@ -656,7 +659,18 @@
         "zh-TW": "顯示產品廠商"
       },
       "default": true
-    }
+    },
+		{
+			"type" : "text",
+			"id" : "btn_label",
+			"label": {
+				"en" : "Button Label"
+			},
+			"default" : {
+				"en" : "Buy Now",
+				"zh-CN" : "立即购买"
+			}
+		}
   ]
 }
 {% endschema %}

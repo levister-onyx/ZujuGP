@@ -1,0 +1,212 @@
+// Breakpoints configuration
+$breakpoints: (
+  mobile-sm: 400px,
+  mobile: 600px,
+  tablet: 800px,
+  laptop: 1024px
+);
+
+
+@import 'breakpoints';
+@import 'mixins';
+@import 'zuju-theme';
+@import 'header_zuju';
+@import 'splash-intro';
+@import 'collection-list_zuju';
+@import 'cart-drawer_zuju';
+@import 'product-template_zuju_variants';
+@import 'feature-row_zuju';
+@import 'gallery_zuju';
+@import 'zuju-static-image-text';
+@import 'footer_zuju';
+
+/*Site Header*/
+.zuju-header{
+  background: #1d1d1b;
+}
+
+.site-header--homepage.show{
+  position: fixed;
+}
+
+.site-header__wrapper{
+  background: #4a4a4a;
+}
+
+.site-header--fixed .site-header__wrapper{
+  background: #4a4a4a;
+}
+
+/* Image with Text */
+.banner__hero{
+  padding-top: 40px;
+  max-width: 1200px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.feature-row{
+  padding: 50px 0;
+}
+
+.feature-row__image-wrapper {
+	margin-left: auto;
+}
+
+.feature-row__text{
+	margin-left: 0;
+}
+
+@include media("<=tablet") {
+	.feature-row__image{
+		height: 300px!important;
+	}
+}
+
+/* collection-template.liquid */
+.section-header__title{
+  font-family: $zujuStandard;
+}
+
+/* collection-list */
+
+div.featured-collection__heading .grid__item h2{
+	font-family: $zujuBlack;
+}
+
+.featured-collection__view-all a.btn.btn--secondary{
+	font-size: 12px;
+}
+
+.collection-grid-item__title h3.h3.text-title{
+	font-family: $zujuBlack;
+	text-transform: none !important;
+}
+
+.collection-grid-item__image{
+	@include media("<=768px"){
+		background-position: center center;
+	}
+}
+
+/* Snippets: product-card-zuju.liquid */
+.card__zuju{
+  background-color: transparent!important;
+  position: relative;
+	height: 100%!important;
+}
+
+.zuju_product_title{
+  color: #fff;
+  position: absolute;
+  left: 0; 
+  right: 0;
+  margin: 20px 30px;
+	z-index: 1;
+  font-family: $zujuBlack;
+	text-shadow: 0px 0px 15px #000;
+}
+
+/* Snippets: product-card-zuju.liquid */
+.card__info.card__info__zuju{
+  background-color: transparent!important;
+  position: absolute;
+	margin: 0 auto;
+	left: 0; 
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.card__info{
+	padding: unset!important;
+	padding-bottom: 2%;
+}
+
+.btn__more__zuju{
+  width: 153px;
+  height: 50px;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #ED2938;
+  font-family: $zujuBold;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  line-height: 16px;
+  border: none;
+	margin-top: 5px;
+
+	&__wrapper{
+		padding: 0px 0px 80px;
+		text-align: center;
+	
+		.card__price{
+			font-family: "Montserrat",sans-serif;
+			font-weight: bold;
+			font-size: 16px;
+		}
+	}
+}
+
+
+/* =========================== */
+/* collection-template.liquid */
+/* collection detail page */
+/* =========================== */
+
+.product-template__media{
+	padding-top: 50px;
+}
+
+.product__content-main{
+	justify-content: space-around;
+}
+
+.product-form__item.product-form__quantity-selector{
+	label, input{
+		font-size: 16px;
+		line-height: 24px;
+	}
+}
+
+.btn.btn--to-secondary.btn--full.product__add-to-cart-button.shopify-payment-btn.btn--secondary,
+.shopify-payment-button__button.shopify-payment-button__button--unbranded{
+	font-size: 12px;
+}
+
+.product__form-container{
+	max-width: 340px;
+	margin: auto;
+}
+
+.product-form__item~.shopify-payment-btn{
+	margin-top: 20px;
+}
+
+.section-header__title_zuju{
+	font-family: $zujuBlack;
+}
+
+.section-header__description{
+	color: #fff;
+}
+
+.social-sharing__toggle-text{
+	font-size: 16px;
+}
+
+.text-small{
+	font-size: 15px!important;
+}
+
+/*=====================*/
+/*custom-content.liquid*/
+/*=====================*/
+
+.custom__block{
+	&-heading-text.h2{
+		font-family: $zujuBlack;
+	}
+}

@@ -1,0 +1,71 @@
+
+.feature-row_zuju{
+	display: flex;
+	@include container;
+	position: relative;
+
+	&-image{
+		padding-left: 0;
+	}
+
+	&-text{
+		position: absolute;
+		font-family: $zujuBlack;
+		font-size: 48px;
+		color: #fff;
+		line-height: 80px;
+		top: 48%;
+		left: 55%;
+
+		&-big{
+			font-size: 80px;
+		}
+
+		.zuju__text{
+			max-width: 350px;
+
+			&-big{
+				font-size: 64px;
+			}
+		}
+	}
+
+	@include media("<=768px"){
+
+		&-text{
+			font-size: 32px;
+			line-height: 50px;
+			text-align: center;
+			left: 0;
+			right: 0;
+			top: 0;
+			padding-top: 50px;
+			.zuju__text{
+				max-width: 350px;
+				margin: auto;
+				&-big{
+					font-size: 64px;
+				}
+			}
+		}
+	}
+
+
+	@include media("<=425px"){
+		padding-top: 50px;
+		display: flex;
+		flex-direction: column-reverse;
+
+		&-text{
+			position: relative;
+			margin-bottom: -50px;
+			font-size: 32px;
+			.zuju__text{
+				&-big{
+					font-size: 48px;
+				}
+			}
+		}
+	}
+	
+}

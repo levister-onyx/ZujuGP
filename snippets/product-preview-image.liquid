@@ -22,7 +22,6 @@
 {% endcomment %}
 
 
-
 {%- if gallery_type == 'media' -%}
   {% comment %}
     We need to figure out the max width we want the image to be on the page
@@ -33,17 +32,44 @@
   {% assign max_width = 980 %}
   {% assign max_aspect_ratio = 1.50769 %}
 
+	<script>
+		/*
+		console.log(`
+		<p>Media Aspect Ratio: {{media.preview_image.aspect_ratio}}</p>
+		<p>Media Width: {{media.preview_image.width}}</p>
+		<p>Media Height: {{media.preview_image.height}}</p>
+		
+		<p>Max aspect ratio: {{max_aspect_ratio}}</p>
+		<p>Max Width: {{max_width}}</p>
+		<p>Max Height: {{max_height}}</p>
+		`);*/
+	</script>
+		
+
+
   {%- if media.preview_image.aspect_ratio < max_aspect_ratio -%}
     {%- if media.preview_image.height < max_height -%}
+		{%comment%}
       {% assign max_width = media.preview_image.width | times: media.preview_image.aspect_ratio | round %}
+		{%endcomment%}
+		{% assign max_width = media.preview_image.width %}
+			{% assign custommsg = "if 11" %}
     {%- else -%}
       {% assign max_width = max_height | times: media.preview_image.aspect_ratio | round %}
+			{% assign custommsg = "else 1" %}
     {%- endif -%}
   {%- else -%}
     {%- if media.preview_image.width < max_width -%}
       {% assign max_width = media.preview_image.width %}
+			{% assign custommsg = "else 2" %}
     {%- endif -%}
   {%- endif -%}
+
+
+	<div style="color:#fff;display: none;">
+		<p>Max Width: {{max_width}}</p>
+		<p>Custom Message: {{custommsg}}</p>
+	</div>
 
   {% comment %}
   Create a container for the media that will never go wider than the
