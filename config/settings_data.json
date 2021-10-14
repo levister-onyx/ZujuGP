@@ -17,14 +17,14 @@
     "type_header_font": "monotype_baskerville_n4",
     "type_base_font": "avenir_next_n4",
     "show_cart_drawer": true,
-    "show_cart_note": false,
+    "show_cart_note": true,
     "share_facebook": true,
     "share_twitter": true,
     "share_pinterest": true,
     "social_tumblr_link": "",
     "social_youtube_link": "",
     "social_vimeo_link": "",
-    "favicon": "",
+    "favicon": "shopify:\/\/shop_images\/unnamed-2.png",
     "checkout_header_image": "",
     "checkout_logo_image": "",
     "checkout_logo_position": "left",
@@ -45,7 +45,8 @@
         "type": "header",
         "settings": {
           "icon": "bag",
-          "logo_max_height": 15,
+          "logo": "shopify:\/\/shop_images\/zuju_logo_Plan_de_travail_1_copie_5.jpg",
+          "logo_max_height": 20,
           "enable_transparent": true,
           "transparent_text_color": "#ffffff",
           "primary_navigation": "main-menu",
@@ -85,14 +86,16 @@
       "collection-template": {
         "type": "collection-template",
         "settings": {
-          "products": "2",
+          "products": "3",
           "rows": "6",
           "product_tags_enable": false,
           "product_sorting_enable": false,
           "collection_hero_image": false,
-          "collection_hero_image_parallax": false,
+          "collection_hero_image_parallax": true,
+          "grid_style": "grid",
           "show_spacing": false,
-          "show_vendor": true
+          "show_vendor": false,
+          "btn_label": "PRE-ORDER"
         }
       },
       "product-template": {
@@ -155,70 +158,253 @@
       },
       "1631526658e453437b": {
         "type": "splash-intro",
-        "settings": {}
-      },
-      "163178825717b21e3f": {
-        "type": "gallery",
-        "blocks": {
-          "163178825717b21e3f-0": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/soccer-ball-through-net.jpg",
-              "alignment": "top left",
-              "icon": "checkmark",
-              "cta_label": "Talk about your brand",
-              "link": ""
-            }
-          }
-        },
-        "block_order": [
-          "163178825717b21e3f-0"
-        ],
         "settings": {
-          "section_height": "medium",
-          "show_overlay": true,
-          "overlay_color": "#000000",
-          "overlay_text": "#ffffff",
-          "overlay_opacity": "0.3"
+          "open_door_title": "One-off items in impossibly limited runs",
+          "open_door_title_info": ""
         }
       },
-      "1631788443172e54fe": {
-        "type": "collection-list",
+      "1631903588f8d63228": {
+        "type": "zuju-collection-list",
+        "settings": {
+          "collection": "kungfu-dash",
+          "title": "Turbo boost play with Gift Packs and top the Leaderboard Challenge to win a chance to meet Cristiano Ronaldo online! Gift Packs offer you up to 50% savings! Siiiuuuuuu!",
+          "heading_style": "h4",
+          "btn_label": "BUY NOW",
+          "show_vendor": false,
+          "show_view_all": false,
+          "use_second_button": false,
+          "grid_style": "grid",
+          "products": 4,
+          "rows": 4
+        }
+      },
+      "product-template_zuju": {
+        "type": "product-template_zuju",
+        "settings": {
+          "show_quantity_selector": true,
+          "show_variant_labels": true,
+          "show_vendor": false,
+          "enable_payment_button": true,
+          "show_share_buttons": true,
+          "enable_video_looping": false,
+          "hide_variant_media": true
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": true,
+          "show_spacing": true,
+          "show_vendor": true
+        }
+      },
+      "zuju-collection-list": {
+        "type": "zuju-collection-list",
+        "settings": {
+          "collection": "featured-collection",
+          "title": "Don’t miss out  on these exclusive products",
+          "btn_label": "Buy Now",
+          "show_vendor": false,
+          "show_view_all": true,
+          "use_second_button": true,
+          "grid_style": "collage",
+          "products": 4,
+          "rows": 2
+        }
+      },
+      "header_zuju": {
+        "type": "header_zuju",
+        "settings": {}
+      },
+      "footer_zuju": {
+        "type": "footer_zuju",
         "blocks": {
-          "1631788443172e54fe-0": {
-            "type": "collection",
+          "a6134a43-982b-43e6-8b10-c5cfa4e53a6a": {
+            "type": "menu",
             "settings": {
-              "collection": ""
+              "link_list": "footer"
             }
           },
-          "1631788443172e54fe-1": {
-            "type": "collection",
+          "519372e8-d207-415f-9038-f7b6b6bf6c2e": {
+            "type": "menu",
             "settings": {
-              "collection": ""
+              "link_list": "footer"
             }
           },
-          "1631788443172e54fe-2": {
-            "type": "collection",
+          "74e0e4ad-a3ad-4840-9aef-dc4bf9b4bdfd": {
+            "type": "menu",
             "settings": {
-              "collection": ""
+              "link_list": "footer"
+            }
+          },
+          "5b37a61f-2030-441d-a43f-bfefa6b36622": {
+            "type": "menu",
+            "settings": {
+              "link_list": "footer"
+            }
+          },
+          "927c75ab-1b0a-46eb-857a-49a07a2ee925": {
+            "type": "menu",
+            "settings": {
+              "link_list": "footer"
             }
           }
         },
         "block_order": [
-          "1631788443172e54fe-0",
-          "1631788443172e54fe-1",
-          "1631788443172e54fe-2"
+          "a6134a43-982b-43e6-8b10-c5cfa4e53a6a",
+          "519372e8-d207-415f-9038-f7b6b6bf6c2e",
+          "74e0e4ad-a3ad-4840-9aef-dc4bf9b4bdfd",
+          "5b37a61f-2030-441d-a43f-bfefa6b36622",
+          "927c75ab-1b0a-46eb-857a-49a07a2ee925"
         ],
         "settings": {
-          "title": "Collection list",
-          "grid": 3
+          "show_social_icons": true,
+          "show_payment_icons": true,
+          "enable_parallax": false,
+          "show_newsletter": false,
+          "newsletter_heading": "Sign up for updates",
+          "newsletter_subheading": "<p>Promotions, new products and sales. Directly to your inbox.<\/p>"
+        }
+      },
+      "product-template_zuju_variants": {
+        "type": "product-template_zuju_variants",
+        "settings": {
+          "show_quantity_selector": true,
+          "show_variant_labels": true,
+          "show_vendor": false,
+          "enable_payment_button": true,
+          "show_share_buttons": false,
+          "enable_video_looping": false,
+          "hide_variant_media": true
+        }
+      },
+      "1633411827b4c976c2": {
+        "type": "zuju-static-image-text",
+        "settings": {
+          "desktop_image": "shopify:\/\/shop_images\/banner-rewards.jpg",
+          "mobile_image": "shopify:\/\/shop_images\/banner-rewards_1814237c-fb36-4a38-bd71-af4d26ebe275.jpg",
+          "heading": "Reward and Loyalty Z Points",
+          "text": "Get rewarded for shopping and <br> spending time with us!",
+          "use_second_button": true,
+          "button_text": "Find out more",
+          "button_link": "https:\/\/dev.zujugp.com\/about-rewards"
+        }
+      },
+      "163343495305ebbde0": {
+        "type": "feature-row_zuju",
+        "disabled": true,
+        "settings": {
+          "image": "shopify:\/\/shop_images\/shopify-listing-present.png"
+        }
+      },
+      "163350497931e8b7b5": {
+        "type": "collection-list_zuju",
+        "blocks": {
+          "163350497931e8b7b5-2": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "collection": "kungfu-dash"
+            }
+          },
+          "613066fe-f190-4c79-9217-4657408f4c63": {
+            "type": "collection",
+            "settings": {
+              "collection": "1st-edition"
+            }
+          },
+          "36ae57fa-9355-48c0-a430-21154fe4fc9d": {
+            "type": "collection",
+            "settings": {
+              "collection": "baby-kids"
+            }
+          },
+          "3127a7f5-a546-4505-af2c-51138da0e8a9": {
+            "type": "collection",
+            "settings": {
+              "collection": "cards-stationery-party"
+            }
+          },
+          "f2e756e6-1819-42e2-939d-744032c4ee45": {
+            "type": "collection",
+            "settings": {
+              "collection": "assorted"
+            }
+          }
+        },
+        "block_order": [
+          "163350497931e8b7b5-2",
+          "613066fe-f190-4c79-9217-4657408f4c63",
+          "36ae57fa-9355-48c0-a430-21154fe4fc9d",
+          "3127a7f5-a546-4505-af2c-51138da0e8a9",
+          "f2e756e6-1819-42e2-939d-744032c4ee45"
+        ],
+        "settings": {
+          "title": "Our Products",
+          "grid": 4
+        }
+      },
+      "product-related_zuju": {
+        "type": "product-related_zuju",
+        "settings": {
+          "show_related_products": true,
+          "related_title": "Other fine products",
+          "related_grid_num": "3",
+          "related_grid_row": "3"
+        }
+      },
+      "1634014938de6c40da": {
+        "type": "custom-content",
+        "blocks": {
+          "1634014938de6c40da-0": {
+            "type": "text",
+            "settings": {
+              "heading_text": "Pre-Order Products",
+              "heading_color": "#ffffff",
+              "heading_style": "h2",
+              "paragraph_text": "<p>Pre-order products are available to purchase now and will be shipped to you as soon as we receive the item at ZujuGP or while stocks last.<\/p><p>Either on the product information page, or through communication with us, you will find the current ETA. This is the estimated date that our suppliers have given us for stock to arrive at ZujuGP.<\/p><p>Your order will be shipped out on the day that the stock arrives at ZujuGP, with the rare exception that it arrives too late in the day or during the weekend, in which case it will be shipped the following working day. <\/p><p>Orders are processed on a first come first served basis.<\/p><p>Your card will be charged in full on placement of the order. We will send email updates to you to confirm estimated arrival dates.<\/p><p>You can cancel or amend your order anytime before the order has been dispatched to you.<\/p>",
+              "paragraph_color": "#4a4a4a",
+              "paragraph_size": "1.25",
+              "width": "100%",
+              "alignment": "bottom",
+              "align_text": "center"
+            }
+          }
+        },
+        "block_order": [
+          "1634014938de6c40da-0"
+        ],
+        "settings": {
+          "heading_text": "",
+          "heading_color": "#242424",
+          "background_color": "#242424",
+          "top_margin": true,
+          "bottom_margin": true
+        }
+      },
+      "collection-template_zuju": {
+        "type": "collection-template_zuju",
+        "settings": {
+          "products": 4,
+          "rows": "4",
+          "product_tags_enable": false,
+          "product_sorting_enable": false,
+          "collection_hero_image": false,
+          "collection_hero_image_parallax": false,
+          "grid_style": "grid",
+          "show_spacing": false,
+          "show_vendor": false,
+          "btn_label": "PRE-ORDER"
         }
       }
     },
     "content_for_index": [
       "1631526658e453437b",
-      "163178825717b21e3f",
-      "1631788443172e54fe"
+      "1634014938de6c40da",
+      "163350497931e8b7b5",
+      "1631903588f8d63228",
+      "1633411827b4c976c2",
+      "163343495305ebbde0"
     ]
   },
   "presets": {

@@ -1,4 +1,5 @@
 {%- assign product = all_products[section.settings.featured_product] -%}
+            {% render 'preorder-now-collection-item', product: product %}
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign current_variant_sale = false -%}
 {% assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media %}

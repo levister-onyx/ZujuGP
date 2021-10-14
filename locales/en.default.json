@@ -100,7 +100,7 @@
     "general": {
       "title": "Shopping Cart",
       "remove": "Remove",
-      "note": "Special instructions for seller",
+      "note": "Note: To receive ZujuGP Z Points for selected products (such as Kungfu Dash in-game items), please enter the email that you used to sign up for ZujuGP membership.",
       "subtotal": "Subtotal",
       "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout",
       "taxes_and_shipping_policy_at_checkout_html": "Taxes and <a href=\"{{ link }}\">shipping<\/a> calculated at checkout",
@@ -340,5 +340,13 @@
   "video": {
     "play": "Play video",
     "close": "Stop video"
+  },
+  "shopify": {
+    "checkout": {
+      "contact": {
+        "email_label": "Email",
+        "contact_method_title": "*Important note: To receive Z Points for selected products, please enter your existing ZujuGP account email address."
+      }
+    }
   }
 }
