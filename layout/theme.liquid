@@ -16,8 +16,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="{{ settings.color_primary }}">
   <link rel="canonical" href="{{ canonical_url }}">
-
-  {% if settings.favicon != blank %}
+  
+	{% if settings.favicon != blank %}
     <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
   {% endif %}
 
@@ -107,6 +107,18 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.6.3/plugins/overscroll.js"></script>
   <!-- End Animation -->
   <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+
+	<!-- Google Tag Manager -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-202997516-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-202997516-1');
+</script>
+	<!-- END Google Tag Manager -->
 
 </head>
 
