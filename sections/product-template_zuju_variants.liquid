@@ -35,8 +35,8 @@
 
             <span class="product__compare-price-label visually-hidden">{{ 'products.product.regular_price' | t }}</span>
             <s class="product__compare-price" data-compare-price>{{ current_variant.compare_at_price | money }}</s>
+							{% include 'product-unit-price', variant: current_variant %}
 
-            {% include 'product-unit-price', variant: current_variant %}
           </p>
 
           {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
@@ -90,9 +90,10 @@
 									{%- if featured_media == variant_media -%}
 										{% assign featured = true %}
 									{%- endif -%}
+									
+										{% include 'product-preview-image' with media: variant_media, featured_media: featured, gallery_type: 'media', data_image: 'data-variant-media-image' %}
 
-									{% include 'product-preview-image' with media: variant_media, featured_media: featured, gallery_type: 'media', data_image: 'data-variant-media-image' %}
-								{%- endif -%}
+									{%- endif -%}
 
 							{% endfor %}
 						{%- endunless -%}

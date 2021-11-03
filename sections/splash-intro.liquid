@@ -8,13 +8,13 @@
 	background-size: cover;
 }
 </style>
+
 {% assign myLang = request.locale.iso_code %}
 
 <div id="content-wrapper">
 
-    <section class="scrollContent">     
-          
-      <section class="panel" id="doors">
+    <section class="scrollContent">
+			<section class="panel" id="doors">
           <div class="splashTitle">
 						{% case myLang %}
 						{% when "zh-CN" %}
@@ -30,18 +30,27 @@
           <img src="{{ 'door-left.jpg' | asset_url }}" class="doorLeft">
           <img src="{{ 'door-right.jpg' | asset_url }}" class="doorRight">
       </section>
-      
-      <section class="panel" id="doors_opened">
-				<audio class="audio" src="{{ 'gong.mp3' | asset_url }}" preload="auto"></audio>
-        <div class="splashText">
-          <h1 class="h1">{{ section.settings.open_door_title }}</h1>
-          <h3 class="h3 splashText__minitext">
-            {{ section.settings.open_door_title_info }}
-          </h3>
-        </div>
-      </section>
 
-    </section>
+			<section class="panel" id="doors_opened">
+
+				<audio class="audio" src="{{ 'gong.mp3' | asset_url }}" preload="auto"></audio>
+				<div class="splashText">
+					<h1 class="h1">{{ section.settings.open_door_title }}</h1>
+					<h3 class="h3 splashText__minitext">
+						{{ section.settings.open_door_title_info }}
+					</h3>
+				</div>
+
+				<section class="animation">
+					<video mute pause preload="auto" style="max-width: 100%; height: auto;" id="myVideo" style="display: none;">
+						<source src="https://cdn.shopify.com/s/files/1/0596/6345/0277/files/butterfly_v2.mov?v=1635522101">
+						<source src="https://cdn.shopify.com/s/files/1/0596/6345/0277/files/butterfly_v2.webm?v=1635522229">
+						<!--<source src="{{"butterfly.mov" | asset_url}}" type="video/mov">
+						<source src="{{"butterfly.webm" | asset_url}}" type="video/webm">-->
+					</video>
+				</section>
+			</section>
+
 </div>
 
 <script src="{{ 'doors.js' | asset_url }}"></script>
@@ -83,6 +92,3 @@
 }
 
 {% endstylesheet %}
-
-{% javascript %} 
-{% endjavascript %}

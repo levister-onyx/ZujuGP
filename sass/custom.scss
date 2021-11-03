@@ -9,7 +9,7 @@ $breakpoints: (
 
 @import 'breakpoints';
 @import 'mixins';
-@import 'zuju-theme';
+@import '_zuju-theme';
 @import 'header_zuju';
 @import 'splash-intro';
 @import 'collection-list_zuju';
@@ -18,6 +18,7 @@ $breakpoints: (
 @import 'feature-row_zuju';
 @import 'gallery_zuju';
 @import 'zuju-static-image-text';
+@import 'zuju_product-recommendations';
 @import 'footer_zuju';
 
 /*Site Header*/
@@ -35,6 +36,10 @@ $breakpoints: (
 
 .site-header--fixed .site-header__wrapper{
   background: #4a4a4a;
+}
+
+.site-header__cart svg{
+	width: 22px!important;
 }
 
 /* Image with Text */
@@ -210,3 +215,12 @@ div.featured-collection__heading .grid__item h2{
 		font-family: $zujuBlack;
 	}
 }
+
+@media only screen and (min-width: 750px) {
+	.product-recommendations__slide {
+	-webkit-flex: 0 0 calc(33% - 4rem);
+			-moz-flex: 0 0 calc(33% - 4rem);
+			-ms-flex: 0 0 calc(33% - 4rem);
+			flex: 0 0 calc(33% - 4rem);
+	}
+	}

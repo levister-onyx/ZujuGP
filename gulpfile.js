@@ -14,7 +14,7 @@ gulp.task("sass", function () {
 gulp.task("watch", function () {
   gulp.watch("sass/*.scss", gulp.series("sass"));
   themeKit.command("watch", {
-    allowLive: true,
+    allowLive: false,
     env: "development",
   });
 });

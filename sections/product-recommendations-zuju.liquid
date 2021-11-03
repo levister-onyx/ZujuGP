@@ -1,0 +1,172 @@
+{% if section.settings.show_related_products == true %}
+<div class="page-width product-recommendations-zuju" data-section-id="{{ section.id }}" data-section-type="collection-template">
+
+	{% assign heading = section.settings.related_title %}
+
+	{% assign same_vendor = false %}
+	{% assign same_type = false %}
+
+	{% assign exclusions = 'frontpage,all' | split: ',' %}
+
+	{% if product.metafields.c_f['Related Products'] %}
+		{% assign collection = collections[product.metafields.c_f['Related Products']] %}
+	{% endif %}
+
+	{% assign found_a_collection = false %}
+	{% if collection and collection.all_products_count > 1 %}
+		{% unless exclusions contains collection.handle %}
+			{% assign found_a_collection = true %}
+		{% endunless %}
+	{% endif %}
+
+	{% unless found_a_collection %}
+		{% for c in product.collections %}
+			{% unless exclusions contains c.handle or c.all_products_count < 2 %}
+				{% assign found_a_collection = true %}
+				{% assign collection = c %}
+				{% break %}
+			{% endunless %}
+		{% endfor %}
+	{% endunless %}
+
+	{% comment %}
+		If we have a relevant collection.
+	{% endcomment %}
+
+	{% if found_a_collection %}
+
+		{% assign counter = 0 %}
+		{% assign break_at = number_of_rows | times: number_of_related_products_per_row %}
+		{% assign current_product = product %}
+
+			{% case number_of_related_products_per_row %}
+			{% when '1' %}
+				{% assign grid_item_width = '' %}
+			{% when '2' %}
+				{% assign grid_item_width = 'large--one-half medium--one-half' %}
+			{% when '3' %}
+				{% assign grid_item_width = 'large--one-third medium--one-third' %}
+			{% when '4' %}
+				{% assign grid_item_width = 'large--one-quarter medium--one-third small--one-half' %}
+			{% when '5' %}
+				{% assign grid_item_width = 'large--one-fifth medium--one-third small--one-half' %}
+			{% when '6' %}
+				{% assign grid_item_width = 'large--one-sixth medium--one-third small--one-half' %}
+			{% else %}
+				{% assign grid_item_width = 'large--one-quarter medium--one-third small--one-half' %}
+		{% endcase %}
+
+
+		{%- assign desktopColumns = section.settings.related_grid_num -%}
+
+		{%- capture gridClasses -%}
+			{% if desktopColumns == 4 %}
+				medium-up--one-quarter
+			{% elsif desktopColumns == 3 %}
+				medium-up--one-third
+			{% elsif desktopColumns == 2 %}
+				medium-up--one-half
+			{% else %}
+				medium-up--one-half
+			{% endif %}
+
+		{%- endcapture -%}
+
+		{% capture related_items %}
+		<div class="card-list grid" data-desktop-columns="{{ desktopColumns }}" data-mobile-columns="2" data-grid-style="{{ section.settings.grid_style }}">
+			<div class="card-list__column{% if totalProducts == 1 %} card-list__column--center{% endif %} grid grid__item small--one-whole  {{ gridClasses }}">
+
+			{% for product in collection.products %}
+			
+				{% unless product.handle == current_product.handle %}
+					{% unless same_vendor and current_product.vendor != product.vendor %}
+						{% unless same_type and current_product.type != product.type %}
+								{% include 'product-card-zuju', product: product, grid_style: section.settings.grid_style, btn_label:section.settings.btn_label %}
+							{% assign counter = counter | plus: 1 %}
+							{% if counter == break_at %}
+								{% break %}
+							{% endif %}
+						{% endunless %}
+					{% endunless %}
+				{% endunless %}
+			{% endfor %}
+				</div>
+			</div>
+		{% endcapture %}
+
+		{% assign related_items = related_items | trim %}
+
+		{% unless related_items == blank %}
+
+		<aside class="grid">
+			<div class="grid__item">
+				{% unless heading == blank %}
+				<div class="featured-collection__heading grid text-center zuju-heading">
+					<div class="grid__item medium-up--ten-twelfths medium-up--push-one-twelfth">
+						<h2 class="custom__block-heading-text h2" style="color:#fff">{{ heading | escape }}</h2>
+					</div>
+				</div>
+				
+				{% endunless %}
+				<div class="grid-uniform">
+					{{ related_items }}
+				</div>
+			</div>
+		</aside>
+
+		{% endunless %}
+			
+	{% endif %}
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Zuju Related products",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_related_products",
+      "label": "Show related products",
+      "default": false
+    },
+    {
+      "id": "related_title",
+      "type": "text",
+      "label": "Section title",
+      "default": "Other fine products"
+    },
+    {
+      "type": "range",
+      "id": "related_grid_num",
+      "label": "Products per row (Desktop)",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+		{
+			"type" : "text",
+			"id" : "btn_label",
+			"label": {
+				"en" : "Button Label"
+			},
+			"default" : {
+				"en" : "Buy Now",
+				"zh-CN" : "立即购买"
+			}
+		}
+  ]
+}
+{% endschema %}
+
+
+
+<style>
+  #ProductSection-related-products .card {opacity:1;overflow:auto;}
+  #ProductSection-related-products {margin-bottom:30px;}
+  #shopify-section-related-products .medium-up--one-third {float:left;padding-right:30px;}
+  .card.even h3.card__name.h4, .card.even .card__name.h4.h3 {text-align:left !Important;}
+  .card{padding-bottom:20px;}
+  
+</style>

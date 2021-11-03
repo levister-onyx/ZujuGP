@@ -1,9 +1,5 @@
 {% assign img_url = type | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
 
-<script>
-	console.log('{{img_url}}');
-</script>
-
 {% if grid_style == 'grid' %}
   <div class="card__image-wrapper card__image-wrapper--aligned" style="padding-top:{{ 0.8 | divided_by: type.aspect_ratio | times: 100}}%">
 

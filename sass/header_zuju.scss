@@ -196,8 +196,8 @@
 
   a {
     color: #999;
-		font-size: 1.7rem;
-		margin: 0 0.7rem;
+		font-size: 1.5rem;
+		margin: 0 0.5rem;
   }
 
 	svg.icon.icon-header-cart{
@@ -210,12 +210,12 @@
 	}
 }
 
-@include media("<=425px"){
+@include media("<=560px"){
 	.social-links{
 		margin-right: -10px;
-	}
-
-	.currency_selector_zuju{
-		display: none!important;
+		
+		a:not(:last-child){
+			display: none!important;
+		}
 	}
 }

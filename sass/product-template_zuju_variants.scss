@@ -12,6 +12,11 @@
 			font-family: $zujuBlack;
 	}
 
+	&__submedia-list{
+		max-width: 980px;
+		margin: auto;
+	}
+
 	&__description{
 
 		width: unset;
