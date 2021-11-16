@@ -12,7 +12,7 @@
     margin: 0 1.4rem;
     @include transition;
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
 
     &:before {
@@ -27,7 +27,7 @@
       @include transition;
     }
 
-    &:hover {
+    &:hover{
       color: #ed2938;
 
       &:before {
@@ -36,6 +36,17 @@
       }
     }
   }
+
+	li.active a {
+		color: #ed2938;
+
+    &:before {
+      opacity: 1;
+      width: 100%;
+    }
+  }
+
+
 }
 
 .main-nav {

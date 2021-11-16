@@ -91,7 +91,7 @@ div.featured-collection__heading .grid__item h2{
 
 .collection-grid-item__image{
 	@include media("<=768px"){
-		background-position: center center;
+		//background-position: center center;
 	}
 }
 
@@ -152,6 +152,15 @@ div.featured-collection__heading .grid__item h2{
 			font-weight: bold;
 			font-size: 16px;
 		}
+
+		@include media("<=425px"){
+			padding-bottom: 60px;
+		}
+	}
+
+	&:disabled{
+		opacity: .5;
+		text-decoration: none;
 	}
 }
 
@@ -179,6 +188,13 @@ div.featured-collection__heading .grid__item h2{
 .btn.btn--to-secondary.btn--full.product__add-to-cart-button.shopify-payment-btn.btn--secondary,
 .shopify-payment-button__button.shopify-payment-button__button--unbranded{
 	font-size: 12px;
+}
+
+.btn.btn--full.btn--to-secondary.product__add-to-cart-button:disabled{
+	font-size: 12px;
+	background-color: transparent;
+	color:#eb4f47;
+	text-decoration: none;
 }
 
 .product__form-container{

@@ -15,6 +15,8 @@
   Product Form & Description
   ------------------------------------------------------------------------------
   {% endcomment %}
+
+
   <div class="product__content page-width">
     <div class="grid">
       <div class="grid__item medium-up--push-one-twelfth medium-up--ten-twelfths">
@@ -71,44 +73,69 @@
 					------------------------------------------------------------------------------
 					{% endcomment %}
 					<!--<div class="product-template__media page-width page-width--no-gutter">-->
-					<div class="product__image page-left">
-						{% assign variant_media_ids = '' %}
+					<div class="page-left">
+						<div class="product__image">
+							{% assign variant_media_ids = '' %}
+							{%- unless product.has_only_default_variant -%}
+							<div class="variant-main">
+								{% for variant in product.variants %}
+										
+										{% assign variant_media = variant.featured_media %}
 
-						{%- unless product.has_only_default_variant -%}
+										{%- if variant_media -%}
+										
+												{%- if variant_media_ids contains variant_media.id -%}
+														{% continue %}
+												{%- endif -%}
 
-							{% for variant in product.variants %}
-								{% assign variant_media = variant.featured_media %}
+												{% assign variant_media_ids = variant_media_ids | append: variant_media.id | append: ' ' %}
+												{% assign featured = false %}
+												
+												{%- if featured_media == variant_media -%}
+														{% assign featured = true %}
+												{%- endif -%}		
+												{% include 'product-preview-image_zuju' with media: variant_media, featured_media: featured, gallery_type: 'media', data_image: 'data-variant-media-image' %}
+											{%- endif -%}
+								{% endfor %}
+							</div>
 
-								{%- if variant_media -%}
-
-									{%- if variant_media_ids contains variant_media.id -%}
-										{% continue %}
-									{%- endif -%}
-
-									{% assign variant_media_ids = variant_media_ids | append: variant_media.id | append: ' ' %}
-									{% assign featured = false %}
-									{%- if featured_media == variant_media -%}
-										{% assign featured = true %}
-									{%- endif -%}
-									
-										{% include 'product-preview-image' with media: variant_media, featured_media: featured, gallery_type: 'media', data_image: 'data-variant-media-image' %}
-
-									{%- endif -%}
-
-							{% endfor %}
+							<div class="slider slider-for slider-for-variant">
+								{% for media in product.media %}
+										<div>	
+											{% include 'product-preview-image_zuju' with media, featured_media: true, gallery_type: 'media', data_image: data_image %} 
+										</div>
+								{% endfor %}
+							</div>
 						{%- endunless -%}
+							
+							{% unless featured_media and variant_media_ids contains featured_media.id %}
+								<div class="slider slider-for">
+									{% for media in product.media %}
+										{% unless variant_media_ids contains media.id and section.settings.hide_variant_media %}
+											{% capture data_image %} data-parent-fit="cover" {% endcapture %}
+											<div>
+												{% include 'product-preview-image_zuju' with media, featured_media: true, gallery_type: 'media', data_image: data_image %} 
+											</div>
+										{% endunless %}
+									{% endfor %}
+								</div>					
+							{%- endunless -%}
 
-						{% unless featured_media and variant_media_ids contains featured_media.id %}
-							{%comment%} 
-								<h1 style="color:#fff">{{featured_media}}</h1>
-							{%endcomment%}
-							{% include 'product-preview-image' with media: featured_media, featured_media: true, gallery_type: 'media', data_image: 'data-variant-media-image' %} 
+							{% include 'shopify-xr-button' %}
+						</div>
 						
+						{%- unless product.images.size <= 2 -%}
+						<div class="page-center">
+							<div class="slider-nav">
+								{% for mediathumb in product.media %}
+									<div>
+										<img src="{{ mediathumb | img_url: '60x60', scale: 3, crop: 'center'  }}" alt="{{ mediathumb.alt | escape }}" class="product__submedia">
+									</div>
+								{% endfor %}
+							</div>
+						</div>
 						{%- endunless -%}
-
-						{% include 'shopify-xr-button' %}
 					</div>
-
 				{%comment%} Picture END {%endcomment%}
           <div class="page-right">
 						<div class="product__form-container" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -166,59 +193,8 @@
       </div>
     {% endif %}
   {% endif %}
-
-
-  {% comment %}
-  ------------------------------------------------------------------------------
-  Product Media Gallery
-  ------------------------------------------------------------------------------
-  {% endcomment %}
-  {%- if product.media.size > 1 -%}
-
+		
     {% comment %}
-      If we are hiding variant media which are displayed at the top of the
-      page, then find total number media not set as a variant media or as the
-      featured media.
-
-      We need the total number of media to be displayed so that we know what
-      arrangement the media need to be positioned in, i.e. rows of 3 or 2
-      media.
-    {% endcomment %}
-
-    {%- if section.settings.hide_variant_media -%}
-      {% assign variant_media_ids_array = variant_media_ids | split: ' ' %}
-      {% assign total_media = product.media.size | minus: variant_media_ids_array.size %}
-    {%- else -%}
-      {% assign total_media = product.media.size %}
-    {%- endif -%}
-
-    {% comment %}
-      Insert images into rows of 3 and/or 2 depending on the total number of
-      images.
-    {% endcomment %}
-    {% assign total_modulus = total_media | modulo: 3 %}
-
-    {% if total_media == 1 %}<div class="page-width">{% endif %}
-
-    <div class="product__submedia-list product__submedia-list--r{{ total_modulus }}{% if total_media == 1 %} product__submedia-list--single{% endif %}">
-
-      {% for media in product.media %}
-
-        {% unless variant_media_ids contains media.id and section.settings.hide_variant_media %}
-          {% capture data_image %}
-            data-parent-fit="cover"
-          {% endcapture %}
-
-          {% include 'product-preview-image' with media, featured_media: false, gallery_type: 'submedia', data_image: data_image %}
-
-        {% endunless %}
-      {% endfor %}
-    </div>
-
-    {% if total_media == 1 %}</div>{% endif %}
-  {% endif %}
-
-  {% comment %}
   ------------------------------------------------------------------------------
   Product Slideshow
   ------------------------------------------------------------------------------
@@ -291,6 +267,38 @@
   <script type="application/json" data-model-json="{{ section.id }}">
     {{ product.media | where: 'media_type', 'model' | json }}
   </script>
+
+	<script>
+		$('.slider-for-variant').hide();
+		
+		$('.slider-for').slick({
+			slidesToScroll: 1,
+			arrows: false,
+			fade: true,
+			asNavFor: '.slider-nav'
+		});
+
+		$('.slider-nav').slick({
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			asNavFor: '.slider-for',
+			dots: false,
+			centerMode: false,
+			focusOnSelect: true
+		});
+
+		$('.slider-nav').click(function() {
+			$('.slider-for-variant').show();
+			$('.variant-main').hide();
+		});
+
+		$('select.single-option-selector').change(function(){
+			$('.slider-for-variant').hide();
+			$('.variant-main').show();
+		});
+
+
+</script>
 </div>
 
 {% schema %}

@@ -40,12 +40,14 @@
     {% endfor %}
   </select>
 
-  {% if section.settings.show_quantity_selector %}
-    <div class="product-form__item product-form__quantity-selector">
-      <label class="product-form__quantity-label{% unless section.settings.show_variant_labels %} product-form__quantity-label--hidden{% endunless %}" for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
-      <input class="product-form__quantity-input" type="number" id="Quantity-{{ section.id }}" name="quantity" value="1" min="1" pattern="[0-9]*">
-    </div>
-  {% endif %}
+	{% if current_variant.available %}
+		{% if section.settings.show_quantity_selector %}
+			<div class="product-form__item product-form__quantity-selector">
+				<label class="product-form__quantity-label{% unless section.settings.show_variant_labels %} product-form__quantity-label--hidden{% endunless %}" for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
+				<input class="product-form__quantity-input" type="number" id="Quantity-{{ section.id }}" name="quantity" value="1" min="1" pattern="[0-9]*">
+			</div>
+		{% endif %}
+	{% endif %}
 
   <button class="btn btn--to-secondary btn--full product__add-to-cart-button{% if section.settings.enable_payment_button and current_variant.available and product.selling_plan_groups == empty %} shopify-payment-btn btn--secondary{% endif %}"
     data-cart-submit

@@ -66,7 +66,15 @@
 						{% endif %}
 					{% endif %}
 				</div>
-				<button class="btn__more__zuju" onclick="window.location.href='{{ product.url }}'"> {{btn_label}} </button>
+				
+				{% unless product.available %}
+					{%- assign button_label = soldout_label -%}
+				{%else%}
+					{%- assign button_label = btn_label -%}
+				{%endunless%}
+
+				<button class="btn__more__zuju" {% unless product.available %} disabled="true" {%endunless%} onclick="window.location.href='{{ product.url }}'"> {{button_label}} </button>
+			
 			</div>
 
       {% if product.compare_at_price > product.price %}

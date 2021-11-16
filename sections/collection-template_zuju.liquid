@@ -84,7 +84,7 @@
           {%comment%}
             {% include 'product-card', product: product, grid_style: section.settings.grid_style %}
           {%endcomment%}
-          {% include 'product-card-zuju', product: product, grid_style: section.settings.grid_style, btn_label:section.settings.btn_label %}
+          {% include 'product-card-zuju', product: product, grid_style: section.settings.grid_style, btn_label:section.settings.btn_label, soldout_label: section.settings.soldout_label %}
         {% endfor %}
       </div>
     </div>
@@ -618,14 +618,27 @@
       "default": true
     },
 		{
+			"type": "header",
+      "content": "Button Settings"
+		},
+		{
 			"type" : "text",
 			"id" : "btn_label",
 			"label": {
-				"en" : "Button Label"
+				"en" : "Purchase Label"
 			},
 			"default" : {
 				"en" : "BUY NOW",
 				"zh-CN" : "立即购买"
+			}
+		},
+		{
+			"type" : "text",
+			"id" : "soldout_label",
+			"label": "Sold Out Label",
+			"default" : {
+				"en" : "SOLD OUT",
+				"zh-CN" : "售罄"
 			}
 		}
   ]

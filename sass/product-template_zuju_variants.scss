@@ -58,6 +58,7 @@
 
 		.page-left{
 			padding-right: 20px;
+			max-width: calc(100% / 2);
 		}
 
 		.page-right{
@@ -80,10 +81,15 @@
 
 		&__content-main{
 			flex-direction: column;
+			align-items: center;
 		
 			.page-left, .page-right{
 				padding-left: unset;
 				padding-right: unset;
+			}
+
+			.page-left{
+				max-width: 75%;
 			}
 
 			.page-right{
@@ -127,3 +133,64 @@ input.product-form__quantity-input, .product-form__quantity-label{
 	background-color: #222022;
 	box-sizing: border-box;
 }
+
+// Image Carousel
+.slider-for img, .slider-nav img {
+	margin: 0 auto;
+}
+
+.slider-nav{
+	margin-top: 20px;
+}
+
+.slider-for .slick-slide {
+	opacity: 0.5;
+	transition: all .3s ease;
+}
+
+.slider{
+	text-align: center;
+}
+
+.slick-slider{
+	height: auto;
+}
+
+.sliderbox{
+	background-color: grey;
+}
+
+.button {
+	background: #3498db;
+	color: #fff;
+	display: block;
+	font-size: 16px;
+	margin: 20px auto;
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	width: 48%;
+}
+.buttons {
+	padding: 0 20px 20px;
+	margin-bottom: 10px;
+}
+.buttons .button {
+	background: #fff;
+	color: #3498db;
+	float: left;
+	margin: 5px;
+}
+
+.slick-prev{
+left: -25px;
+}
+.slick-next{
+right: 25;
+}
+
+.product-slideshow{
+	background-color: rgba(0, 0, 0, 0.9); 
+}
+
+

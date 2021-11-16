@@ -12,44 +12,6 @@
 
   {% comment %}
   ------------------------------------------------------------------------------
-  Product Featured Media
-  ------------------------------------------------------------------------------
-  {% endcomment %}
-  <div class="product-template__media page-width page-width--no-gutter">
-    {% assign variant_media_ids = '' %}
-
-    {%- unless product.has_only_default_variant -%}
-
-      {% for variant in product.variants %}
-        {% assign variant_media = variant.featured_media %}
-
-        {%- if variant_media -%}
-
-          {%- if variant_media_ids contains variant_media.id -%}
-            {% continue %}
-          {%- endif -%}
-
-          {% assign variant_media_ids = variant_media_ids | append: variant_media.id | append: ' ' %}
-          {% assign featured = false %}
-          {%- if featured_media == variant_media -%}
-            {% assign featured = true %}
-          {%- endif -%}
-
-          {% include 'product-preview-image' with media: variant_media, featured_media: featured, gallery_type: 'media', data_image: 'data-variant-media-image' %}
-        {%- endif -%}
-
-      {% endfor %}
-    {%- endunless -%}
-
-    {% unless featured_media and variant_media_ids contains featured_media.id %}
-      {% include 'product-preview-image' with media: featured_media, featured_media: true, gallery_type: 'media', data_image: 'data-variant-media-image' %}
-    {%- endunless -%}
-
-    {% include 'shopify-xr-button' %}
-  </div>
-
-  {% comment %}
-  ------------------------------------------------------------------------------
   Product Form & Description
   ------------------------------------------------------------------------------
   {% endcomment %}
@@ -62,7 +24,7 @@
             <span class="product__vendor text-small text-center" itemprop="brand">{{ product.vendor }}</span>
           {% endif %}
 
-          <h1 class="product__title text-center h1 product__title__zuju" itemprop="name">{{ product.title }}</h1>
+          <h2 class="product__title text-center h2 product__title__zuju" itemprop="name">{{ product.title }}</h2>
          
 					<p class="product__price text-center{% if current_variant_sale %} product__price--sale{% endif %}" data-product-price aria-live="polite">
 
@@ -73,8 +35,8 @@
 
             <span class="product__compare-price-label visually-hidden">{{ 'products.product.regular_price' | t }}</span>
             <s class="product__compare-price" data-compare-price>{{ current_variant.compare_at_price | money }}</s>
+							{% include 'product-unit-price', variant: current_variant %}
 
-            {% include 'product-unit-price', variant: current_variant %}
           </p>
 
           {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
@@ -89,7 +51,6 @@
           {%- endif -%}
 
         </div>
-
         <div class="product__content-main">
 					{%comment%}
 					{% if product.variant %}
@@ -101,39 +62,90 @@
 						</div>
 					{%endif%}
 					{%endcomment%}
-          
-					<div class="product__description rte" itemprop="description" class="rte">
-						{% if product.variants.first.weight > 0 %}
-							<div class="product__description-weight">
-								<div class="product__description-weight-label">Item Weight:</div>
-								<div class="product__description-weight-value">{{ product.variants.first.weight | weight_with_unit }}</div>
+
+					{%comment%} Picture Start {%endcomment%}
+
+				  {% comment %}
+					------------------------------------------------------------------------------
+					Product Featured Media
+					------------------------------------------------------------------------------
+					{% endcomment %}
+					<!--<div class="product-template__media page-width page-width--no-gutter">-->
+					<div class="product__image page-left">
+						{% assign variant_media_ids = '' %}
+
+						{%- unless product.has_only_default_variant -%}
+
+							{% for variant in product.variants %}
+								{% assign variant_media = variant.featured_media %}
+
+								{%- if variant_media -%}
+
+									{%- if variant_media_ids contains variant_media.id -%}
+										{% continue %}
+									{%- endif -%}
+
+									{% assign variant_media_ids = variant_media_ids | append: variant_media.id | append: ' ' %}
+									{% assign featured = false %}
+									{%- if featured_media == variant_media -%}
+										{% assign featured = true %}
+									{%- endif -%}
+									
+										{% include 'product-preview-image' with media: variant_media, featured_media: featured, gallery_type: 'media', data_image: 'data-variant-media-image' %}
+
+									{%- endif -%}
+
+							{% endfor %}
+						{%- endunless -%}
+
+						{% unless featured_media and variant_media_ids contains featured_media.id %}
+							{%comment%} 
+								<h1 style="color:#fff">{{featured_media}}</h1>
+							{%endcomment%}
+							{% include 'product-preview-image' with media: featured_media, featured_media: true, gallery_type: 'media', data_image: 'data-variant-media-image' %} 
+						
+						{%- endunless -%}
+
+						{% include 'shopify-xr-button' %}
+					</div>
+
+				{%comment%} Picture END {%endcomment%}
+          <div class="page-right">
+						<div class="product__form-container" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+							<div class="product__form-wrapper">
+								<meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+								<meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+								<link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+
+								{% include 'product-form' %}
+
+								{% if section.settings.show_share_buttons %}
+									{% if settings.share_facebook or settings.share_twitter or settings.share_pinterest %}
+										<div class="product__share-wrapper small--hide">
+											<div class="product__share">
+													{% include 'social-sharing', type: "product", links: 'bottom' share_title: product.title, share_permalink: product.url, share_image: featured_media %}
+											</div>
+										</div>
+									{% endif %}
+								{% endif %}
 							</div>
-						{% endif %}
+						</div>
+
+						<div class="product__description rte" itemprop="description" class="rte">
+							{% if product.variants.first.weight > 0 %}
+								<div class="product__description-weight">
+									<div class="product__description-weight-label">Item Weight:</div>
+									<div class="product__description-weight-value">{{ product.variants.first.weight | weight_with_unit }}</div>
+								</div>
+							{% endif %}
+						</div>
 						
 						<div class="product__description-info">
-            {{ product.description }}
+						{{ product.description }}
 						</div>
-          </div>
+						
 
-          <div class="product__form-container" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-            <div class="product__form-wrapper">
-              <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
-              <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
-              <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
-
-              {% include 'product-form' %}
-
-              {% if section.settings.show_share_buttons %}
-                {% if settings.share_facebook or settings.share_twitter or settings.share_pinterest %}
-                  <div class="product__share-wrapper small--hide">
-                    <div class="product__share">
-                        {% include 'social-sharing', type: "product", links: 'bottom' share_title: product.title, share_permalink: product.url, share_image: featured_media %}
-                    </div>
-                  </div>
-                {% endif %}
-              {% endif %}
-            </div>
-          </div>
+					</div>
 
         </div>
       </div>
