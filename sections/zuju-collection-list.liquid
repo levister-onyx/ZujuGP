@@ -41,7 +41,7 @@
       <div class="card-list__column{% if totalProducts == 1 %} card-list__column--center{% endif %} grid grid__item {{ gridClasses }}">
         {% unless featuredCollection == blank %}
           {% for product in featuredCollection.products limit: limit %}
-						{% include 'product-card-zuju', product: product, grid_style: section.settings.grid_style, btn_label: section.settings.btn_label | t %}
+						{% include 'product-card-zuju', product: product, grid_style: section.settings.grid_style, btn_label:section.settings.btn_label, soldout_label: section.settings.soldout_label %}
           {% endfor %}
         {% else %}
           {% for i in (1..limit) %}
@@ -374,17 +374,30 @@
 			}
 		]
 	},
-		{
-			"type" : "text",
-			"id" : "btn_label",
-			"label": {
-				"en" : "Button Label"
-			},
-			"default" : {
-				"en" : "Buy Now",
-				"zh-CN" : "立即购买"
-			}
+	{
+		"type": "header",
+		"content": "Button Settings"
+	},
+	{
+		"type" : "text",
+		"id" : "btn_label",
+		"label": {
+			"en" : "Purchase Label"
 		},
+		"default" : {
+			"en" : "BUY NOW",
+			"zh-CN" : "立即购买"
+		}
+	},
+	{
+		"type" : "text",
+		"id" : "soldout_label",
+		"label": "Sold Out Label",
+		"default" : {
+			"en" : "SOLD OUT",
+			"zh-CN" : "售罄"
+		}
+	},
     {
       "type": "checkbox",
       "id": "show_vendor",

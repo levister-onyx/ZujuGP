@@ -73,7 +73,7 @@
 		{%- endcapture -%}
 
 		{% capture related_items %}
-		<div class="card-list grid" data-desktop-columns="{{ desktopColumns }}" data-mobile-columns="2" data-grid-style="{{ section.settings.grid_style }}">
+		<div class="card-list grid" data-desktop-columns="{{ desktopColumns }}" data-mobile-columns="2" data-grid-style="grid">
 			<div class="card-list__column{% if totalProducts == 1 %} card-list__column--center{% endif %} grid grid__item small--one-whole  {{ gridClasses }}">
 
 			{% for product in collection.products %}
@@ -81,7 +81,7 @@
 				{% unless product.handle == current_product.handle %}
 					{% unless same_vendor and current_product.vendor != product.vendor %}
 						{% unless same_type and current_product.type != product.type %}
-								{% include 'product-card-zuju', product: product, grid_style: section.settings.grid_style, btn_label:section.settings.btn_label %}
+								{% include 'product-card-zuju', product: product, grid_style: "grid", btn_label:section.settings.btn_label, soldout_label: section.settings.soldout_label %}
 							{% assign counter = counter | plus: 1 %}
 							{% if counter == break_at %}
 								{% break %}
@@ -146,14 +146,27 @@
       "default": 2
     },
 		{
+			"type": "header",
+      "content": "Button Settings"
+		},
+		{
 			"type" : "text",
 			"id" : "btn_label",
 			"label": {
-				"en" : "Button Label"
+				"en" : "Purchase Label"
 			},
 			"default" : {
-				"en" : "Buy Now",
+				"en" : "BUY NOW",
 				"zh-CN" : "立即购买"
+			}
+		},
+		{
+			"type" : "text",
+			"id" : "soldout_label",
+			"label": "Sold Out Label",
+			"default" : {
+				"en" : "SOLD OUT",
+				"zh-CN" : "售罄"
 			}
 		}
   ]

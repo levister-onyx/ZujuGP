@@ -17,13 +17,25 @@
 					{% include 'multilingual_currency' %}
 
           <div class="top-nav__social social-links">
-						<a href="https://www.zujugp.com/convo/cr-in-commercial" target="_blank"><i class="far fa-comment"></i></a>
-            <a href="https://www.facebook.com/zujugp" target="_blank"><i class="fab fa-facebook-square"></i></a>
-            <a href="http://instagram.com/zujugp" target="_blank"><i class="fab fa-instagram"></i></a>
-						<a href="http://twitter.com/zujugp" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.youtube.com/channel/UCbXvRvjZAt5aZhBNlDFxHuw" target="_blank"><i class="fab fa-youtube"></i></a>
-						<a href="https://weibo.com/u/7706292600" target="_blank"><img src="{{'icon-weibo.png'| asset_img_url: '30x'}}"/></a>
-            <a href="{{ routes.cart_url }}" class="btn btn--clear btn--square btn--hover-scale site-header__cart ajax-cart__toggle" aria-expanded="false">
+						{% if section.settings.convo %}
+							<a href="{{section.settings.convo_url}}" target="_blank"><i class="far fa-comment"></i></a>
+						{% endif %}
+            {% if section.settings.facebook %}
+							<a href="{{section.settings.facebook_url}}" target="_blank"><i class="fab fa-facebook-square"></i></a>
+            {% endif %}
+            {% if section.settings.instagram %}
+							<a href="{{section.settings.instagram_url}}" target="_blank"><i class="fab fa-instagram"></i></a>
+						{% endif %}
+						{% if section.settings.twitter %}
+							<a href="{{section.settings.twitter_url}}" target="_blank"><i class="fab fa-twitter"></i></a>
+						{% endif %}
+						{% if section.settings.youtube %}
+            	<a href="{{section.settings.youtube}}" target="_blank"><i class="fab fa-youtube"></i></a>
+						{% endif %}
+						{% if section.settings.weibo %}
+							<a href="{{section.settings.youtube_url}}" target="_blank"><img src="{{'icon-weibo.png'| asset_img_url: '30x'}}"/></a>
+            {%endif%}
+						<a href="{{ routes.cart_url }}" class="btn btn--clear btn--square btn--hover-scale site-header__cart ajax-cart__toggle" aria-expanded="false">
               {%- assign icon = 'icon-header-cart' %}
               {% include icon %}
               <span class="icon__fallback-text">{{ 'general.header.view_cart' | t }}</span>
@@ -42,33 +54,34 @@
           </div>
 
           <div class="main-nav__omega">
-              <span >
-              <div >
-                <ul role="menu">
-                {% case myLang %}
-									{% when "zh-CN" %}
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/latest" role="menuitem">最新发布</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/portfolio" role="menuitem">更多模块</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/impact" role="menuitem">影响力</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://shop.zujugp.com/{{request.locale.iso_code}}" role="menuitem" rel="noopener">商城</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/about-us" role="menuitem">关于</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/about-rewards" role="menuitem">奖励</a></li>
-										<!--<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://nft.zujugp.com" role="menuitem">Collectibles</a></li>-->
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.zujugp.com/{{request.locale.iso_code}}/members-portal" role="menuitem">账户</a></li>
-									{% else %}
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/latest" role="menuitem">Latest</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/portfolio" role="menuitem">Portfolio</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/impact" role="menuitem">Impact</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://shop.zujugp.com" role="menuitem" rel="noopener">Shop</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/about-us" role="menuitem">About</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/about-rewards" role="menuitem">Rewards</a></li>
-										<!--<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://nft.zujugp.com" role="menuitem">Collectibles</a></li>-->
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.zujugp.com/members-portal" role="menuitem">Account</a></li>
-									{% endcase %}
+						<span >
+							{%- assign link_list = linklists[section.settings.link_list] -%}
+							<div>
+								<ul>
+									{% for link in link_list.links %}
+										<li class="{% if link.active %} active {% endif %}"><a href="{{ link.url }}">{{ link.title }}</a></li>
+									{% endfor %}
 								</ul>
-              </div>
-            </span>
+							</div>
+						</span>
+
+
+
+
+
+
             {% comment %}
+						<div>
+								{% assign menu = linklists[section.settings.main_linklist] %}
+								{% for link in menu.links %}
+									{% if link.links != blank %}
+										<li class="{% if link.active %} active {% endif %}" role="none" aria-haspopup="true">
+											<a href="{{ link.url }}" role="menuitem">{{ link.title }}</a>
+										</li>
+									{% endif %}
+								{% endfor %}
+							</div>
+
             {% if request_contact.is_logged_in %}
               <a class="nav__link" href="/_hcms/mem/logout">Logout</a>
             {% else %}
@@ -97,28 +110,11 @@
               </svg>
 
               <!-- Off canvas -->
-              <ul class="off-canvas__menu">
-								{% case myLang %}
-									{% when "zh-CN" %}
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/latest" role="menuitem">最新发布</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/portfolio" role="menuitem">更多模块</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/impact" role="menuitem">影响力</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://shop.zujugp.com/{{request.locale.iso_code}}" role="menuitem" rel="noopener">商城</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/about-us" role="menuitem">关于</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/about-rewards" role="menuitem">奖励</a></li>
-										<!--<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://nft.zujugp.com" role="menuitem">Collectibles</a></li>-->
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.zujugp.com/{{request.locale.iso_code}}/members-portal" role="menuitem">账户</a></li>
-									{% else %}
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/latest" role="menuitem">Latest</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/portfolio" role="menuitem">Portfolio</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/impact" role="menuitem">Impact</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://shop.zujugp.com" role="menuitem" rel="noopener">Shop</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/about-us" role="menuitem">About</a></li>
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/about-rewards" role="menuitem">Rewards</a></li>
-										<!--<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://nft.zujugp.com" role="menuitem">Collectibles</a></li>-->
-										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.zujugp.com/members-portal" role="menuitem">Account</a></li>
-									{% endcase %}
-              </ul>
+								<ul class="off-canvas__menu">
+									{% for link in link_list.links %}
+										<li class="{% if link.active %} active {% endif %}"><a href="{{ link.url }}">{{ link.title }}</a></li>
+									{% endfor %}
+								</ul>
             </div>
 
             <!-- Burger menu -->
@@ -135,3 +131,107 @@
     <!-- END -->
   </header>
 </div>
+
+{% schema %}
+{
+	"name":{
+		"en" : "Header",
+		"zh-CN": "主菜单"
+	},
+	"settings": [
+		{
+			"type":"header",
+			"content":"Menu Settings"
+		},
+		{
+			"id": "link_list",
+			"type": "link_list",
+			"label": "Menu"
+		},
+		{
+			"type": "header",
+			"content": "Convo Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "convo",
+      "label": "Show Convo"
+		},
+		{
+			"type": "url",
+			"id": "convo_url",
+			"label":"Convo Link"
+		},
+		{
+			"type": "header",
+			"content": "Facebook Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "facebook",
+      "label": "Show Facebook"
+		},
+		{
+			"type": "url",
+			"id": "facebook_url",
+			"label":"Facebook Link"
+		},
+		{
+			"type": "header",
+			"content": "Instagram Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "instagram",
+      "label": "Show Instagram"
+		},
+		{
+			"type": "url",
+			"id": "instagram_url",
+			"label":"Instagram Link"
+		},
+		{
+			"type": "header",
+			"content": "Twitter Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "twitter",
+      "label": "Show Twitter"
+		},
+		{
+			"type": "url",
+			"id": "twitter_url",
+			"label":"Twitter Link"
+		},
+		{
+			"type": "header",
+			"content": "Youtube Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "youtube",
+      "label": "Show Youtube"
+		},
+		{
+			"type": "url",
+			"id": "youtube_url",
+			"label":"Youtube Link"
+		},
+		{
+			"type": "header",
+			"content": "Weibo Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "weibo",
+      "label": "Show Weibo"
+		},
+		{
+			"type": "url",
+			"id": "weibo_url",
+			"label":"Weibo Link"
+		}
+	]
+}
+{% endschema %}

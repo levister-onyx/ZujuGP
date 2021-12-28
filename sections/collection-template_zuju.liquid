@@ -78,13 +78,13 @@
 			{% if mobileColumns == '2' %}small--one-half {% endif %}
 		{%- endcapture -%}
 
-    <div class="card-list grid" data-desktop-columns="{{ desktopColumns }}" data-mobile-columns="{{ mobileColumns }}" data-grid-style="{{ section.settings.grid_style }}">
+    <div class="card-list grid" data-desktop-columns="{{ desktopColumns }}" data-mobile-columns="{{ mobileColumns }}" data-grid-style="grid">
       <div class="card-list__column{% if totalProducts == 1 %} card-list__column--center{% endif %} grid grid__item {{ gridClasses }}">
         {% for product in collection.products %}
           {%comment%}
             {% include 'product-card', product: product, grid_style: section.settings.grid_style %}
           {%endcomment%}
-          {% include 'product-card-zuju', product: product, grid_style: section.settings.grid_style, btn_label:section.settings.btn_label, soldout_label: section.settings.soldout_label %}
+          {% include 'product-card-zuju', product: product, grid_style: "grid", btn_label:section.settings.btn_label, soldout_label: section.settings.soldout_label %}
         {% endfor %}
       </div>
     </div>
@@ -479,88 +479,6 @@
         "zh-CN": "产品",
         "zh-TW": "產品"
       }
-    },
-    {
-      "type": "select",
-      "id": "grid_style",
-      "label": {
-        "cs": "Styl mřížky",
-        "da": "Gittertypografi",
-        "de": "Rasterstil",
-        "en": "Grid style",
-        "es": "Estilo de cuadrícula",
-        "fi": "Ruudukkotyyli",
-        "fr": "Style de grille",
-        "it": "Stile griglia",
-        "ja": "グリッドスタイル",
-        "ko": "그리드 스타일",
-        "nb": "Rutenettstil",
-        "nl": "Rasterstijl",
-        "pl": "Styl siatki",
-        "pt-BR": "Estilo da grade",
-        "pt-PT": "Estilo da grelha",
-        "sv": "Rutnätsstil",
-        "th": "รูปแบบกริด",
-        "tr": "Izgara stili",
-        "vi": "Kiểu lưới",
-        "zh-CN": "网格样式",
-        "zh-TW": "網格樣式"
-      },
-      "default": "collage",
-      "options": [
-        {
-          "value": "collage",
-          "label": {
-            "cs": "Koláž",
-            "da": "Collage",
-            "de": "Collage",
-            "en": "Collage",
-            "es": "Collage",
-            "fi": "Kollaasi",
-            "fr": "Collage",
-            "it": "Collage",
-            "ja": "コラージュ",
-            "ko": "콜라주",
-            "nb": "Fotomontasje",
-            "nl": "Collage",
-            "pl": "Kolaż",
-            "pt-BR": "Colagem",
-            "pt-PT": "Colagem",
-            "sv": "Kollage",
-            "th": "ภาพตัดแปะ",
-            "tr": "Kolaj",
-            "vi": "Ghép",
-            "zh-CN": "拼贴画",
-            "zh-TW": "拼貼"
-          }
-        },
-        {
-          "value": "grid",
-          "label": {
-            "cs": "Mřížka",
-            "da": "Gitter",
-            "de": "Raster",
-            "en": "Grid",
-            "es": "Cuadrícula",
-            "fi": "Ruudukko",
-            "fr": "Grille",
-            "it": "Griglia",
-            "ja": "グリッド",
-            "ko": "그리드",
-            "nb": "Rutenett",
-            "nl": "Grid",
-            "pl": "Siatka",
-            "pt-BR": "Grade",
-            "pt-PT": "Grelha",
-            "sv": "Rutnät",
-            "th": "กริด",
-            "tr": "Izgara",
-            "vi": "Lưới",
-            "zh-CN": "网格",
-            "zh-TW": "網格"
-          }
-        }
-      ]
     },
     {
       "type": "checkbox",

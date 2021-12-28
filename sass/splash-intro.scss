@@ -53,11 +53,6 @@
 
   h1{
     font-family: $zujuBlack;
-    position: absolute;
-    left: 50%;
-    color: white;
-    transform: translate(-50%, -50%);
-
 		@include media("<=768px"){
 			font-size: 48px;
 			line-height: 56px;
@@ -65,9 +60,30 @@
 		}
   }
 
+	&__main{
+		position: absolute;
+    left: 50%;
+    color: white;
+    transform: translate(-50%, -50%);
+		margin: 0 20px;
+	
+
+		@include media("<=768px"){
+			transform: unset;
+			left: unset;
+			bottom: 125%;
+		}
+
+		&.subtitle{
+			bottom: 125%;
+		}
+	}
+
+	
+
   &__minitext{
     font-family: $zujuBlack;
-    margin-top: 24px;
+		margin: 0 20px;
   }
 
 	// @include media("<=450px"){
@@ -137,3 +153,18 @@ video {
   left: 0;
 	object-position: center;
 }
+
+
+.scrollContent {
+	// Detect iOS
+	@supports (-webkit-overflow-scrolling: touch) {
+		@include media("<=800px"){
+			background-attachment:scroll!important;
+			background-size: auto;
+			height: 100%;
+			overflow: hidden;
+		}
+	}
+}
+
+

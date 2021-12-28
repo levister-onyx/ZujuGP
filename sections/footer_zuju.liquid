@@ -26,7 +26,12 @@
 <div class="footer-image">
 	<img class="triangle" src="{{ 'triangle.png'| asset_url }}">
 	<div class="callout-section">
-		<img src="{{ 'callout.png' | asset_url }}">
+		{% case myLang %}
+		{% when "zh-CN" %}
+			<img src="{{ 'callout-cn.png' | asset_url }}">
+		{% else %}
+			<img src="{{ 'callout.png' | asset_url }}">
+		{% endcase %}
 	</div>
 </div>
 
@@ -34,106 +39,43 @@
 		<div class="page-width">
 			
 			<div class="footer__nav">
-
-				<div class="footer__nav-col">
-					{% case myLang %}
-					{% when "zh-CN" %}
-						<h4>公司</h4>
+				{% for block in section.blocks %}
+				{%- assign link_list = block.settings.link_list -%}
+					<div class="footer__nav-col">
 						<ul>
-							<li><a href="//www.zujugp.com/{{request.locale.iso_code}}/about-us">关于我们</a></li>
-							<!--<li><a href="#">Impact</a></li>
-							<li><a href="#">Advertise</a></li>-->
+							<h4>{{link_list.title}}</h4>
+							{% for link in linklists[link_list].links %}
+								<li><a href="{{ link.url }}">{{ link.title }}</a></li>
+							{% endfor %}
 						</ul>
-					{% else %}
-						<h4>Company</h4>
-						<ul>
-							<li><a href="//www.zujugp.com/about-us">About</a></li>
-							<!--<li><a href="#">Impact</a></li>
-							<li><a href="#">Advertise</a></li>-->
+					</div>
+				{% endfor %}				
+				
+				{% if section.settings.show_social_media %}
+					<div class="footer__nav-col">
+							<h4>{{section.settings.title_social}}</h4>
+						<ul class="footer__social">
+							{% if section.settings.convo %}
+								<li><a href="{{section.settings.convo_url}}" target="_blank"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true"><g id="comment1_layer"><path d="M256 32C114.6 32 0 125.1 0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3 0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4 0 256-93.1 256-208S397.4 32 256 32z"></path></g></svg><span>Convo</span></a></li>
+							{% endif %}
+							{% if section.settings.facebook %}
+								<li><a href="{{section.settings.facebook_url}}"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true"><g id="Facebook2_layer"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"></path></g></svg>Facebook</a></li>
+							{% endif %}
+							{% if section.settings.instagram %}
+								<li><a href="{{section.settings.instagram_url}}"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><g id="Instagram3_layer"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></g></svg>Instagram</a></li>						
+							{% endif %}
+							{% if section.settings.twitter %}
+								<li><a href="{{section.settings.facebook_url}}"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true"><g id="Twitter4_layer"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></g></svg>Twitter</a></li>
+							{% endif %}
+							{% if section.settings.youtube %}
+								<li><a href="{{section.settings.youtube_url}}"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" aria-hidden="true"><g id="YouTube5_layer"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></g></svg>Youtube</a></li>
+							{% endif %}
+							{% if section.settings.weibo %}
+								<li><a href="{{section.settings.weibo_url}}" target="_blank"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true"><g id="Weibo6_layer"><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"></path></g></svg>Weibo</a></li>
+							{% endif %}
 						</ul>
-					{% endcase %}
-				</div>
-
-				<div class="footer__nav-col">
-					{% case myLang %}
-					{% when "zh-CN" %}
-						<h4>文章</h4>
-						<ul>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/latest?hsLang=zh-cn">所有</a></li>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/latest/tag/opinion?hsLang=zh-cn">观点</a></li>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/latest/tag/local-eye?hsLang=zh-cn">当地</a></li>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/latest/tag/offside?hsLang=zh-cn">周边</a></li>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/latest/tag/gallery?hsLang=zh-cn">画廊</a></li>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/latest/tag/icon?hsLang=zh-cn">图腾</a></li>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/latest/tag/line-up?hsLang=zh-cn">榜单</a></li>
-						</ul>
-					{% else %}
-						<h4>Articles</h4>
-						<ul>
-							<li><a href="https://www.zujugp.com/latest">All</a></li>
-							<li><a href="https://www.zujugp.com/latest/tag/opinion">Opinion</a></li>
-							<li><a href="https://www.zujugp.com/latest/tag/local-eye">Local Eye</a></li>
-							<li><a href="https://www.zujugp.com/latest/tag/offside">Offside</a></li>
-							<li><a href="https://www.zujugp.com/latest/tag/gallery">Gallery</a></li>
-							<li><a href="https://www.zujugp.com/latest/tag/icon">Icon</a></li>
-							<li><a href="https://www.zujugp.com/latest/tag/line-up">Line Up</a></li>
-						</ul>
-					{% endcase %}
-					
-				</div>
-
-				<div class="footer__nav-col">
-					{% case myLang %}
-					{% when "zh-CN" %}
-						<h4>更多模块</h4>
-						<ul>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/portfolio/zujugameplay?hsLang=zh-cn">蹴蹴游戏空间</a></li>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/portfolio/zujugameplay?hsLang=zh-cn">蹴蹴交换空间</a></li>
-							<li><a href="https://www.zujugp.com/{{request.locale.iso_code}}/portfolio/zujugp-rank?hsLang=zh-cn">蹴蹴探索空间</a></li>
-						</ul>
-					{% else %}
-						<h4>Portfolio</h4>
-						<ul>
-							<li><a href="https://www.zujugp.com/portfolio/zujugameplay">ZujuGamePlay</a></li>
-							<li><a href="https://www.zujugp.com/portfolio/zujugameplay">ZujuGP Exchange</a></li>
-							<li><a href="https://www.zujugp.com/portfolio/zujugp-rank">ZujuGP Rank</a></li>
-						</ul>
-					{% endcase %}
-				</div>
-
-				<div class="footer__nav-col">
-					{% case myLang %}
-					{% when "zh-CN" %}
-						<h4>法律</h4>
-						<ul>
-							<li><a href="http://www.zujugp.com/{{request.locale.iso_code}}/privacy-policy?hsLang=zh-cn">隐私政策</a></li>
-							<li><a href="http://www.zujugp.com/{{request.locale.iso_code}}/terms-of-use?hsLang=zh-cn">使用条款</a></li>
-						</ul>
-					{% else %}
-						<h4>Legal</h4>
-						<ul>
-							<li><a href="http://www.zujugp.com/privacy-policy">Privacy Policy</a></li>
-							<li><a href="http://www.zujugp.com/terms-of-use">Terms of use</a></li>
-						</ul>
-					{% endcase %}
-				</div>
-	
-				<div class="footer__nav-col">
-					{% case myLang %}
-					{% when "zh-CN" %}
-						<h4>联系我们</h4>
-					{% else %}
-						<h4>Connect with us</h4>
-					{% endcase %}
-					<ul class="footer__social">
-						<li><a href="https://www.zujugp.com/convo/cr-in-commercial" target="_blank"><i class="far fa-comment" style="margin-right: 10px;"></i><span>Convo</span></a></li>
-						<li><a href="https://www.facebook.com/zujugp"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="19" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-32 736H663.9V602.2h104l15.6-120.7H663.9v-77.1c0-35 9.7-58.8 59.8-58.8h63.9v-108c-11.1-1.5-49-4.8-93.2-4.8-92.2 0-155.3 56.3-155.3 159.6v89H434.9v120.7h104.3V848H176V176h672v672z"></path></svg>Facebook</a></li>
-						<li><a href="http://instagram.com/zujugp"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="19" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M512 306.9c-113.5 0-205.1 91.6-205.1 205.1S398.5 717.1 512 717.1 717.1 625.5 717.1 512 625.5 306.9 512 306.9zm0 338.4c-73.4 0-133.3-59.9-133.3-133.3S438.6 378.7 512 378.7 645.3 438.6 645.3 512 585.4 645.3 512 645.3zm213.5-394.6c-26.5 0-47.9 21.4-47.9 47.9s21.4 47.9 47.9 47.9 47.9-21.3 47.9-47.9a47.84 47.84 0 0 0-47.9-47.9zM911.8 512c0-55.2.5-109.9-2.6-165-3.1-64-17.7-120.8-64.5-167.6-46.9-46.9-103.6-61.4-167.6-64.5-55.2-3.1-109.9-2.6-165-2.6-55.2 0-109.9-.5-165 2.6-64 3.1-120.8 17.7-167.6 64.5C132.6 226.3 118.1 283 115 347c-3.1 55.2-2.6 109.9-2.6 165s-.5 109.9 2.6 165c3.1 64 17.7 120.8 64.5 167.6 46.9 46.9 103.6 61.4 167.6 64.5 55.2 3.1 109.9 2.6 165 2.6 55.2 0 109.9.5 165-2.6 64-3.1 120.8-17.7 167.6-64.5 46.9-46.9 61.4-103.6 64.5-167.6 3.2-55.1 2.6-109.8 2.6-165zm-88 235.8c-7.3 18.2-16.1 31.8-30.2 45.8-14.1 14.1-27.6 22.9-45.8 30.2C695.2 844.7 570.3 840 512 840c-58.3 0-183.3 4.7-235.9-16.1-18.2-7.3-31.8-16.1-45.8-30.2-14.1-14.1-22.9-27.6-30.2-45.8C179.3 695.2 184 570.3 184 512c0-58.3-4.7-183.3 16.1-235.9 7.3-18.2 16.1-31.8 30.2-45.8s27.6-22.9 45.8-30.2C328.7 179.3 453.7 184 512 184s183.3-4.7 235.9 16.1c18.2 7.3 31.8 16.1 45.8 30.2 14.1 14.1 22.9 27.6 30.2 45.8C844.7 328.7 840 453.7 840 512c0 58.3 4.7 183.2-16.2 235.8z"></path></svg>Instagram</a></li>						
-						<li><a href="http://twitter.com/zujugp"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="19" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg> Twitter</a></li>
-						<li><a href="https://www.youtube.com/channel/UCbXvRvjZAt5aZhBNlDFxHuw"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="19" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M960 509.2c0-2.2 0-4.7-.1-7.6-.1-8.1-.3-17.2-.5-26.9-.8-27.9-2.2-55.7-4.4-81.9-3-36.1-7.4-66.2-13.4-88.8a139.52 139.52 0 0 0-98.3-98.5c-28.3-7.6-83.7-12.3-161.7-15.2-37.1-1.4-76.8-2.3-116.5-2.8-13.9-.2-26.8-.3-38.4-.4h-29.4c-11.6.1-24.5.2-38.4.4-39.7.5-79.4 1.4-116.5 2.8-78 3-133.5 7.7-161.7 15.2A139.35 139.35 0 0 0 82.4 304C76.3 326.6 72 356.7 69 392.8c-2.2 26.2-3.6 54-4.4 81.9-.3 9.7-.4 18.8-.5 26.9 0 2.9-.1 5.4-.1 7.6v5.6c0 2.2 0 4.7.1 7.6.1 8.1.3 17.2.5 26.9.8 27.9 2.2 55.7 4.4 81.9 3 36.1 7.4 66.2 13.4 88.8 12.8 47.9 50.4 85.7 98.3 98.5 28.2 7.6 83.7 12.3 161.7 15.2 37.1 1.4 76.8 2.3 116.5 2.8 13.9.2 26.8.3 38.4.4h29.4c11.6-.1 24.5-.2 38.4-.4 39.7-.5 79.4-1.4 116.5-2.8 78-3 133.5-7.7 161.7-15.2 47.9-12.8 85.5-50.5 98.3-98.5 6.1-22.6 10.4-52.7 13.4-88.8 2.2-26.2 3.6-54 4.4-81.9.3-9.7.4-18.8.5-26.9 0-2.9.1-5.4.1-7.6v-5.6zm-72 5.2c0 2.1 0 4.4-.1 7.1-.1 7.8-.3 16.4-.5 25.7-.7 26.6-2.1 53.2-4.2 77.9-2.7 32.2-6.5 58.6-11.2 76.3-6.2 23.1-24.4 41.4-47.4 47.5-21 5.6-73.9 10.1-145.8 12.8-36.4 1.4-75.6 2.3-114.7 2.8-13.7.2-26.4.3-37.8.3h-28.6l-37.8-.3c-39.1-.5-78.2-1.4-114.7-2.8-71.9-2.8-124.9-7.2-145.8-12.8-23-6.2-41.2-24.4-47.4-47.5-4.7-17.7-8.5-44.1-11.2-76.3-2.1-24.7-3.4-51.3-4.2-77.9-.3-9.3-.4-18-.5-25.7 0-2.7-.1-5.1-.1-7.1v-4.8c0-2.1 0-4.4.1-7.1.1-7.8.3-16.4.5-25.7.7-26.6 2.1-53.2 4.2-77.9 2.7-32.2 6.5-58.6 11.2-76.3 6.2-23.1 24.4-41.4 47.4-47.5 21-5.6 73.9-10.1 145.8-12.8 36.4-1.4 75.6-2.3 114.7-2.8 13.7-.2 26.4-.3 37.8-.3h28.6l37.8.3c39.1.5 78.2 1.4 114.7 2.8 71.9 2.8 124.9 7.2 145.8 12.8 23 6.2 41.2 24.4 47.4 47.5 4.7 17.7 8.5 44.1 11.2 76.3 2.1 24.7 3.4 51.3 4.2 77.9.3 9.3.4 18 .5 25.7 0 2.7.1 5.1.1 7.1v4.8zM423 646l232-135-232-133z"></path></svg>Youtube</a></li>
-						<li><a href="https://weibo.com/u/7706292600" target="_blank"><img src="{{'icon-weibo.png'| asset_img_url: '20x'}}" style="margin-right: 10px;"/>Weibo</a></li>
-					</ul>
-				</div>
+					</div>
+				{% endif %}
 			</div>
 
 			<a href="https://mintmediallc.com" class="footer__copyright">&copy; 2021 Mint Media Sports Limited</a>
@@ -143,132 +85,12 @@
 
 {% schema %}
 {
-  "name": {
-    "cs": "Zápatí",
-    "da": "Sidefod",
-    "de": "Fußzeile",
-    "en": "Footer",
-    "es": "Pie de página",
-    "fi": "Alatunniste",
-    "fr": "Pied de page",
-    "it": "Footer",
-    "ja": "フッター",
-    "ko": "바닥글",
-    "nb": "Footer",
-    "nl": "Voettekst",
-    "pl": "Stopka",
-    "pt-BR": "Rodapé",
-    "pt-PT": "Rodapé",
-    "sv": "Sidfot",
-    "th": "ส่วนท้าย",
-    "tr": "Altbilgi",
-    "vi": "Chân trang",
-    "zh-CN": "页脚",
-    "zh-TW": "頁尾"
-  },
+  "name":  "Footer",
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "show_social_icons",
-      "label": {
-        "cs": "Zobrazit ikony sociálních sítí",
-        "da": "Vis ikoner for sociale medier",
-        "de": "Social-Media-Symbole anzeigen",
-        "en": "Show social icons",
-        "es": "Mostrar íconos de redes sociales",
-        "fi": "Näytä some-kuvakkeet",
-        "fr": "Afficher les icônes de médias sociaux",
-        "it": "Mostra icone social",
-        "ja": "ソーシャルアイコンを表示する",
-        "ko": "소셜 아이콘 표시",
-        "nb": "Vis ikoner for sosiale medier",
-        "nl": "Socialmediapictogrammen weergeven",
-        "pl": "Pokaż ikony mediów społecznościowych",
-        "pt-BR": "Exibir ícones de redes sociais",
-        "pt-PT": "Mostrar ícones de redes sociais",
-        "sv": "Visa sociala ikoner",
-        "th": "แสดงไอคอนโซเชียลมีเดีย",
-        "tr": "Sosyal medya simgeleri göster",
-        "vi": "Hiển thị biểu tượng mạng xã hội",
-        "zh-CN": "显示社交图标",
-        "zh-TW": "顯示社群媒體圖示"
-      },
-      "info": {
-        "cs": "Vyplňte svoje odkazy na sociální sítě v obecném nastavení.",
-        "da": "Udfyld dine links til sociale medier under Generelle indstillinger",
-        "de": "Gib in den allgemeinen Einstellungen deine Social-Media-Links ein",
-        "en": "Fill out your social links in the general settings",
-        "es": "Completa tus enlaces de redes sociales en la configuración General.",
-        "fi": "Täytä sosiaalisen median linkit yleisissä asetuksissa",
-        "fr": "Remplissez vos liens de médias sociaux dans les paramètres généraux",
-        "it": "Inserisci i dati dei link social nelle impostazioni generali.",
-        "ja": "一般設定でソーシャルリンクを記入してください。",
-        "ko": "일반 설정에서 소셜 링크 채우기",
-        "nb": "Fyll ut de sosiale koblingene i de generelle innstillingene",
-        "nl": "Stel je links voor delen via social media in de algemene instellingen in",
-        "pl": "Wypełnij linki mediów społecznościowych w ustawieniach ogólnych",
-        "pt-BR": "Preencha seus links de redes sociais nas configurações gerais",
-        "pt-PT": "Preencha as suas ligações de redes sociais nas definições gerais",
-        "sv": "Fyll i dina sociala länkar i de allmänna inställningarna",
-        "th": "ใส่ลิงก์โซเชียลมีเดียของคุณในการตั้งค่าทั่วไป",
-        "tr": "Genel ayarlardan sosyal medya bağlantılarınızı girin",
-        "vi": "Điền liên kết mạng xã hội trong cài đặt chung",
-        "zh-CN": "在“通用”设置中填写您的社交链接",
-        "zh-TW": "前往一般設定填寫社群連結"
-      },
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": {
-        "cs": "Zobrazit ikony plateb",
-        "da": "Vis betalingsikoner",
-        "de": "Zahlungssymbole anzeigen",
-        "en": "Show payment icons",
-        "es": "Mostrar iconos de pago",
-        "fi": "Näytä maksukuvakkeet",
-        "fr": "Afficher les icônes de paiement",
-        "it": "Mostra le icone di pagamento",
-        "ja": "支払いアイコンを表示する",
-        "ko": "결제 아이콘 표시",
-        "nb": "Vis betalingsikoner",
-        "nl": "Betalingspictogrammen weergeven",
-        "pl": "Pokaż ikony płatności",
-        "pt-BR": "Exibir ícones de pagamento",
-        "pt-PT": "Mostrar ícones de pagamento",
-        "sv": "Visa betalningsikoner",
-        "th": "แสดงไอคอนการชำระเงิน",
-        "tr": "Ödeme simgelerini göster",
-        "vi": "Hiển thị biểu tượng thanh toán",
-        "zh-CN": "显示付款图标",
-        "zh-TW": "顯示付款圖示"
-      },
-      "info": {
-        "cs": "Svoje nastavení plateb aktualizujte v sekci Nastavení/Platby svého obchodu.",
-        "da": "Opdater dine betalingsindstillinger under din butiks Indstillinger / Betalinger",
-        "de": "Aktualisiere unter Einstellungen/Zahlungen deine Zahlungseinstellungen",
-        "en": "Update your payment settings in your store's Settings / Payments",
-        "es": "Actualiza tu configuración de pagos en Configuración/Pagos de tu tienda.",
-        "fi": "Päivitä maksuasetukset kaupan asetuksissa/maksuissa",
-        "fr": "Mettez à jour vos paramètres de paiement dans les paramètres/paiements de votre boutique",
-        "it": "Aggiorna le impostazioni di pagamento nella sezione Impostazioni / Pagamenti del tuo negozio",
-        "ja": "ストアの「設定/決済」で決済設定を更新する",
-        "ko": "스토어 설정 / 결제에서 결제 설정을 업데이트하십시오.",
-        "nb": "Oppdater betalingsinnstillingene i butikkens Innstillinger/Betalinger",
-        "nl": "Werk je betalingsinstelling bij in de secties Instellingen / Betalingen van je winkel",
-        "pl": "Aktualizuj ustawienia płatności w Ustawieniach sklepu / Płatności",
-        "pt-BR": "Atualize suas configurações de pagamento nas configurações/pagamentos da sua loja",
-        "pt-PT": "Atualize as suas definições de pagamento na secção Definições/Pagamentos da sua loja",
-        "sv": "Uppdatera dina betalningsinställningar i butikens inställningar / betalningar",
-        "th": "อัปเดตการตั้งค่าการชำระเงินของคุณในการตั้งค่า / การชำระเงินของร้านค้า",
-        "tr": "Mağazanızın Ayarlar/Ödemeler bölümünden ödeme ayarlarınızı güncelleyin",
-        "vi": "Cập nhật cài đặt thanh toán trong Cài đặt/Thanh toán của cửa hàng",
-        "zh-CN": "更新商店设置/付款中的付款设置",
-        "zh-TW": "前往您商店的設定 / 付款更新付款設定"
-      },
-      "default": false
-    },
+		{
+			"type":"header",
+			"content": "Footer Behavior"
+		},
     {
       "type": "checkbox",
       "id": "enable_parallax",
@@ -297,160 +119,100 @@
       },
       "default": true
     },
-    {
-      "type": "header",
-      "content": {
-        "cs": "Novinky",
-        "da": "Nyhedsbrev",
-        "de": "Newsletter",
-        "en": "Newsletter",
-        "es": "Boletín",
-        "fi": "Uutiskirje",
-        "fr": "Newsletter",
-        "it": "Newsletter",
-        "ja": "ニュースレター",
-        "ko": "뉴스레터",
-        "nb": "Nyhetsbrev",
-        "nl": "Nieuwsbrief",
-        "pl": "Newsletter",
-        "pt-BR": "Newsletter",
-        "pt-PT": "Newsletter",
-        "sv": "Nyhetsbrev",
-        "th": "จดหมายข่าว",
-        "tr": "Bülten",
-        "vi": "Bản tin",
-        "zh-CN": "新闻通讯",
-        "zh-TW": "電子報"
-      }
-    },
-    {
+		{
+			"type": "checkbox",
+      "id": "show_social_media",
+      "label":"Show Social Media"
+		},
+		{
+			"type": "text",
+      "id": "title_social",
+      "label":"Social Media Label"
+		},
+		{
+			"type": "header",
+			"content": "Convo Settings"
+		},
+		{
       "type": "checkbox",
-      "id": "show_newsletter",
-      "label": {
-        "cs": "Zobrazit přihlášení k odběru novinek",
-        "da": "Vis tilmelding til nyhedsbrev",
-        "de": "Newsletter Signup anzeigen",
-        "en": "Show newsletter signup",
-        "es": "Suscríbete al boletín",
-        "fi": "Näytä uutiskirjeen tilaus",
-        "fr": "Afficher l'inscription à la newsletter",
-        "it": "Mostra iscrizione alla Newsletter",
-        "ja": "ニュースレターの登録を表示する",
-        "ko": "뉴스레터 신청 표시",
-        "nb": "Vis nyhetsbrev-registrering",
-        "nl": "Aanmelden voor nieuwsbrief weergeven",
-        "pl": "Pokaż rejestrację do newslettera",
-        "pt-BR": "Exibir assinatura da newsletter",
-        "pt-PT": "Mostrar registo na newsletter",
-        "sv": "Visa nyhetsbrevsregistrering",
-        "th": "แสดงการสมัครรับจดหมายข่าว",
-        "tr": "Bülten aboneliğini göster",
-        "vi": "Hiển thị đăng ký nhận bản tin",
-        "zh-CN": "显示新闻通讯注册",
-        "zh-TW": "顯示訂閱電子報"
-      },
-      "default": false
-    },
-    {
-      "type": "text",
-      "id": "newsletter_heading",
-      "label": {
-        "cs": "Nadpis",
-        "da": "Overskrift",
-        "de": "Titel",
-        "en": "Heading",
-        "es": "Título",
-        "fi": "Otsake",
-        "fr": "Titre",
-        "it": "Heading",
-        "ja": "見出し",
-        "ko": "제목",
-        "nb": "Overskrift",
-        "nl": "Kop",
-        "pl": "Nagłówek",
-        "pt-BR": "Título",
-        "pt-PT": "Título",
-        "sv": "Rubrik",
-        "th": "ส่วนหัว",
-        "tr": "Başlık",
-        "vi": "Tiêu đề",
-        "zh-CN": "标题",
-        "zh-TW": "標題"
-      },
-      "default": {
-        "cs": "Zaregistrujte se k aktualizacím",
-        "da": "Tilmeld dig opdateringer",
-        "de": "Registriere dich für Aktualisierungen",
-        "en": "Sign up for updates",
-        "es": "Regístrate para recibir actualizaciones",
-        "fi": "Tilaa päivitykset",
-        "fr": "S'inscrire pour recevoir les mises à jour",
-        "it": "Iscriviti per ricevere aggiornamenti",
-        "ja": "サインアップして更新する",
-        "ko": "업데이트 등록하기",
-        "nb": "Registrere deg for oppdateringer",
-        "nl": "Aanmelden voor updates",
-        "pl": "Zarejestruj się, aby być na bieżąco",
-        "pt-BR": "Inscreva-se para receber atualizações",
-        "pt-PT": "Registe-se para receber atualizações",
-        "sv": "Registrera dig för uppdateringar",
-        "th": "ลงทะเบียนเพื่อรับการอัปเดต",
-        "tr": "Güncellemeler için kaydolun",
-        "vi": "Đăng ký thông tin cập nhật",
-        "zh-CN": "注册以获取更新",
-        "zh-TW": "註冊接收最新消息"
-      }
-    },
-    {
-      "type": "richtext",
-      "id": "newsletter_subheading",
-      "label": {
-        "cs": "Podnadpis",
-        "da": "Underoverskrift",
-        "de": "Unter-Überschrift",
-        "en": "Subheading",
-        "es": "Subtítulo",
-        "fi": "Alaotsikko",
-        "fr": "Sous-titre",
-        "it": "Sottotitolo",
-        "ja": "小見出し",
-        "ko": "소제목",
-        "nb": "Underoverskrift",
-        "nl": "Subkop",
-        "pl": "Nagłówek podrzędny",
-        "pt-BR": "Subtítulo",
-        "pt-PT": "Subtítulo",
-        "sv": "Underrubrik",
-        "th": "หัวเรื่องย่อย",
-        "tr": "Alt başlık",
-        "vi": "Tiêu đề phụ",
-        "zh-CN": "副标题",
-        "zh-TW": "子標題"
-      },
-      "default": {
-        "cs": "<p>Získejte informace o propagačních akcích, nových produktech a slevách – přímo do své schránky.</p>",
-        "da": "<p>Reklamer, nye produkter og salg. Direkte i din indbakke.</p>",
-        "de": "<p>Werbeaktionen, neue Produkte und Sonderangebote. Direkt in deinem Posteingang.</p>",
-        "en": "<p>Promotions, new products and sales. Directly to your inbox.</p>",
-        "es": "<p>Promociones, nuevos productos y ventas. Directamente a tu bandeja de entrada.</p>",
-        "fi": "<p>Kampanjat, uudet tuotteet ja myynti. Suoraan saapuneet-kansioosi</p>",
-        "fr": "<p>Promotions, nouveaux produits et soldes. Directement dans votre boîte de réception.</p>",
-        "it": "<p>Promozioni, nuovi prodotti e offerte. Direttamente nella tua casella di posta.</p>",
-        "ja": "<p>新商品やセール情報などのお得な情報をお届けします。</p>",
-        "ko": "<p>프로모션, 신제품, 판매. 받은 편지함으로 바로 이동.</p>",
-        "nb": "<p>Kampanjer, nye produkter og salg. Direkte i innboksen din.</p>",
-        "nl": "<p>Promoties, nieuwe producten en uitverkoop rechtstreeks in je inbox.</p>",
-        "pl": "<p>Promocje, nowe produkty i wyprzedaże. Bezpośrednio do Twojej skrzynki odbiorczej.</p>",
-        "pt-BR": "<p>Promoções, novos produtos e vendas. Diretamente para sua caixa de entrada.</p>",
-        "pt-PT": "<p>Promoções, novos produtos e ofertas. Diretamente na sua caixa de entrada.</p>",
-        "sv": "<p>Kampanjer, nya produkter och försäljning. Direkt till din inkorg.</p>",
-        "th": "<p>โปรโมชัน สินค้าใหม่ และการลดราคา ตรงสู่กล่องจดหมายเข้าของคุณ</p>",
-        "tr": "<p>Promosyonlar, yeni ürünler ve indirimler. Doğrudan gelen kutunuzda.</p>",
-        "vi": "<p>Khuyến mãi, sản phẩm mới và chương trình giảm giá. Trực tiếp vào hộp thư đến của bạn.</p>",
-        "zh-CN": "<p>促销、新产品和销售。直接发送到您的收件箱。</p>",
-        "zh-TW": "<p>讓您直接在收件匣內收取促銷活動、最新產品和特賣活動訊息。</p>"
-      }
-    }
+      "id": "convo",
+      "label": "Show Convo"
+		},
+		{
+			"type": "url",
+			"id": "convo_url",
+			"label":"Convo Link"
+		},
+		{
+			"type": "header",
+			"content": "Facebook Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "facebook",
+      "label": "Show Facebook"
+		},
+		{
+			"type": "url",
+			"id": "facebook_url",
+			"label":"Facebook Link"
+		},
+		{
+			"type": "header",
+			"content": "Instagram Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "instagram",
+      "label": "Show Instagram"
+		},
+		{
+			"type": "url",
+			"id": "instagram_url",
+			"label":"Instagram Link"
+		},
+		{
+			"type": "header",
+			"content": "Twitter Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "twitter",
+      "label": "Show Twitter"
+		},
+		{
+			"type": "url",
+			"id": "twitter_url",
+			"label":"Twitter Link"
+		},
+		{
+			"type": "header",
+			"content": "Youtube Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "youtube",
+      "label": "Show Youtube"
+		},
+		{
+			"type": "url",
+			"id": "youtube_url",
+			"label":"Youtube Link"
+		},
+		{
+			"type": "header",
+			"content": "Weibo Settings"
+		},
+		{
+      "type": "checkbox",
+      "id": "weibo",
+      "label": "Show Weibo"
+		},
+		{
+			"type": "url",
+			"id": "weibo_url",
+			"label":"Weibo Link"
+		}
   ],
   "blocks": [
     {

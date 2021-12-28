@@ -1,55 +1,130 @@
 <style>
-.scrollContent{
-  background: url("{{ 'shopify-masthead.jpg' | asset_url }}") no-repeat fixed center;
-  background-color: #000;
-  object-fit: contain;
-  object-position: center;
-	overflow: hidden;
+.content-wrapper{
+	position: relative;
+	height: 100%;
+	width: auto;
 	background-size: cover;
+	/*
+		position: relative;
+		justify-content: center;
+	*/
 }
+
+.scrollContent{
+
+	background: url("{{ 'shopify-masthead.jpg' | asset_url }}") no-repeat fixed center;
+	background-color: #000;
+	object-position: center;
+	overflow: hidden;
+	object-fit: contain;
+	background-size: cover;
+
+	/*
+	2nd approach
+	background: url("{{ 'shopify-masthead.jpg' | asset_url }}");
+	object-position: bottom;
+	object-fit: cover;
+	overflow: hidden;
+	width: 100%;
+	background-attachment: fixed;
+	*/
+} 
+
+
+/*
+.content-wrapper-mobile{
+	position: relative;
+	text-align: center;
+	height: 90vh;
+}
+
+.scrollContent-mobile{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	
+}
+
+.mobileImg{
+	min-width: 100%;
+	min-height: 100%;
+	object-position: center;
+	object-fit: cover;
+	vertical-align: middle;
+}
+
+.scrollContent-text{
+	position: relative;
+	top: 20%;
+}
+*/
 </style>
 
 {% assign myLang = request.locale.iso_code %}
 
-<div id="content-wrapper">
 
-    <section class="scrollContent">
-			<section class="panel" id="doors">
-          <div class="splashTitle">
-						{% case myLang %}
-						{% when "zh-CN" %}
-							<h2 class="h2">点击进入礼物页面</h2>
-							<h4 class="h4 splashTitle__minitext">滚动进入</h4>
-							<p style="color: whitesmoke"><i class="fas fa-chevron-down fa-4x bounce"></i></p>
-						{% else %}
-							<h2 class="h2">ENTER THE CHAMBERS <BR> OF COOL GIFTS</h2>
-							<h4 class="h4 splashTitle__minitext">SCROLL<br> TO ENTER</h4>
-							<p style="color: whitesmoke"><i class="fas fa-chevron-down fa-4x bounce"></i></p>
-						{% endcase %}
-          </div>
-          <img src="{{ 'door-left.jpg' | asset_url }}" class="doorLeft">
-          <img src="{{ 'door-right.jpg' | asset_url }}" class="doorRight">
-      </section>
-
-			<section class="panel" id="doors_opened">
-
-				<audio class="audio" src="{{ 'gong.mp3' | asset_url }}" preload="auto"></audio>
-				<div class="splashText">
-					<h1 class="h1">{{ section.settings.open_door_title }}</h1>
-					<h3 class="h3 splashText__minitext">
-						{{ section.settings.open_door_title_info }}
-					</h3>
+<div class="content-wrapper">
+	<div class="scrollContent">
+		<section class="panel" id="doors">
+				<div class="splashTitle">
+					{% case myLang %}
+					{% when "zh-CN" %}
+						<h2 class="h2">点击进入礼物页面</h2>
+						<h4 class="h4 splashTitle__minitext">滚动进入</h4>
+						<p style="color: whitesmoke"><i class="fas fa-chevron-down fa-4x bounce"></i></p>
+					{% else %}
+						<h2 class="h2">ENTER THE CHAMBERS <BR> OF COOL GIFTS</h2>
+						<h4 class="h4 splashTitle__minitext">SCROLL<br> TO ENTER</h4>
+						<p style="color: whitesmoke"><i class="fas fa-chevron-down fa-4x bounce"></i></p>
+					{% endcase %}
 				</div>
+				<img src="{{ 'door-left.jpg' | asset_url }}" class="doorLeft">
+				<img src="{{ 'door-right.jpg' | asset_url }}" class="doorRight">
+		</section>
 
-				<section class="animation">
-					<video mute pause preload="auto" style="max-width: 100%; height: auto;" id="myVideo" style="display: none;">
-						<source src="https://cdn.shopify.com/s/files/1/0596/6345/0277/files/butterfly_v2.mov?v=1635522101">
-						<source src="https://cdn.shopify.com/s/files/1/0596/6345/0277/files/butterfly_v2.webm?v=1635522229">
-						<!--<source src="{{"butterfly.mov" | asset_url}}" type="video/mov">
-						<source src="{{"butterfly.webm" | asset_url}}" type="video/webm">-->
-					</video>
-				</section>
+		<section class="panel" id="doors_opened">
+			<audio class="audio" src="{{ 'gong.mp3' | asset_url }}" preload="auto"></audio>
+			
+			<div class="splashText">
+				<h1 class="h1 splashText__main  {% if section.settings.open_door_title_info != "" %}subtitle{% endif %}">{{ section.settings.open_door_title }}</h1>
+				<h3 class="h3 splashText__minitext">
+					{{ section.settings.open_door_title_info }}
+				</h3>
+			</div>
+
+			<section class="animation" style="display:none">
+				<video mute pause preload="auto" style="max-width: 100%; height: auto;" id="myVideo" style="display: none;">
+					<source src="https://cdn.shopify.com/s/files/1/0596/6345/0277/files/butterfly_v2.mov?v=1635522101">
+					<source src="https://cdn.shopify.com/s/files/1/0596/6345/0277/files/butterfly_v2.webm?v=1635522229">
+					<!--<source src="{{"butterfly.mov" | asset_url}}" type="video/mov">
+					<source src="{{"butterfly.webm" | asset_url}}" type="video/webm">-->
+				</video>
 			</section>
+
+		</section>
+	</div>
+</div>
+
+
+<div class="content-wrapper-mobile" style="display: none;">
+	<div class="scrollContent-mobile">
+		<img class="mobileImg" src="{{ 'shopify-masthead.jpg' | asset_url }}">
+	</div>
+	<div class="scrollContent-text">
+		<h2 class="h2">ENTER THE CHAMBERS <BR> OF COOL GIFTS</h2>
+		<h4 class="h4 splashTitle__minitext">SCROLL<br> TO ENTER</h4>
+		<p style="color: whitesmoke"><i class="fas fa-chevron-down fa-4x bounce"></i></p>
+		
+		<video mute preload="auto" style="max-width: 100%; height: auto;" id="myVideoMobile" style="display: none;">
+			<source src="https://cdn.shopify.com/s/files/1/0596/6345/0277/files/butterfly_v2.mov?v=1635522101">
+			<source src="https://cdn.shopify.com/s/files/1/0596/6345/0277/files/butterfly_v2.webm?v=1635522229">
+			<!--<source src="{{"butterfly.mov" | asset_url}}" type="video/mov">
+			<source src="{{"butterfly.webm" | asset_url}}" type="video/webm">-->
+		</video>
+		<audio class="audio" src="{{ 'gong.mp3' | asset_url }}" preload="auto"></audio>
+	</div>
 
 </div>
 
@@ -85,10 +160,3 @@
 	]
   }
 {% endschema %}
-
-{% stylesheet %}
-.content-wrapper{
-  background-color: #000;
-}
-
-{% endstylesheet %}

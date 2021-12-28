@@ -117,4 +117,12 @@ $(function () {
 	.to(bounce_obj, duration / 4, {y:+20, ease:Power2.easeOut}, "bounceme")
 	.to(bounce_obj, duration / 2, { y:0, ease:Bounce.easeOut, delay:duration / 4 }, "bounceme");
   
+/*
+	let videoMobile = document.getElementById('myVideoMobile');
+	videoMobile.play();
+	videoMobile.playbackRate = 0.8;
+	videoMobile.on("pause ended",function(){
+		$(".animation").css("display","none");
+	});
+*/
 });

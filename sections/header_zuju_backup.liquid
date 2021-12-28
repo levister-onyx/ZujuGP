@@ -1,0 +1,180 @@
+{% assign myLang = request.locale.iso_code %}
+{% if myLang == 'zh-CN'%}
+	{% assign logo = 'zujuGP-Logo-cn.png' %}
+	{% assign homeURL = 'https://www.zujugp.com/zh-cn' %}
+{% else %}
+	{% assign logo = 'zujuGP-Logo.png' %}
+	{% assign homeURL = 'https://www.zujugp.com' %}
+{% endif %}
+
+<div class="site-header" data-section-id="{{ section.id }}" data-section-type="header-section" data-drawer-push {% if section.settings.enable_transparent and request.page_type == 'index' %} data-transparent-header="true"{% endif %}>
+  <header class="site-header__wrapper" role="banner">
+    <!-- START-->
+    <div class="nav">
+      <nav class="top-nav">
+        <div class="top-nav__container">
+
+					{% include 'multilingual_currency' %}
+
+          <div class="top-nav__social social-links">
+						<a href="https://www.zujugp.com/convo/cr-in-commercial" target="_blank"><i class="far fa-comment"></i></a>
+            <a href="https://www.facebook.com/zujugp" target="_blank"><i class="fab fa-facebook-square"></i></a>
+            <a href="http://instagram.com/zujugp" target="_blank"><i class="fab fa-instagram"></i></a>
+						<a href="http://twitter.com/zujugp" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.youtube.com/channel/UCbXvRvjZAt5aZhBNlDFxHuw" target="_blank"><i class="fab fa-youtube"></i></a>
+						<a href="https://weibo.com/u/7706292600" target="_blank"><img src="{{'icon-weibo.png'| asset_img_url: '30x'}}"/></a>
+            <a href="{{ routes.cart_url }}" class="btn btn--clear btn--square btn--hover-scale site-header__cart ajax-cart__toggle" aria-expanded="false">
+              {%- assign icon = 'icon-header-cart' %}
+              {% include icon %}
+              <span class="icon__fallback-text">{{ 'general.header.view_cart' | t }}</span>
+              <span class="site-header__cart-bubble{% if cart.item_count > 0 %} site-header__cart-bubble--visible{% endif %}"></span>
+            </a>
+          </div>
+        </div>
+      </nav>
+      <!-- Main nav -->
+      <nav class="main-nav">
+        <div class="main-nav__container">
+          <div class="main-nav__logo clr-primary">
+						<a href="{{homeURL}}">
+            	<img src="{{ logo|asset_url  }}" alt="" />
+						</a>
+          </div>
+
+          <div class="main-nav__omega">
+              <span >
+              <div >
+                <ul role="menu">
+                {% case myLang %}
+									{% when "zh-CN" %}
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/latest" role="menuitem">最新发布</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/portfolio" role="menuitem">更多模块</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/impact" role="menuitem">影响力</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://shop.zujugp.com/{{request.locale.iso_code}}" role="menuitem" rel="noopener">商城</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/about-us" role="menuitem">关于</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/about-rewards" role="menuitem">奖励</a></li>
+										<!--<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://nft.zujugp.com" role="menuitem">Collectibles</a></li>-->
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.zujugp.com/{{request.locale.iso_code}}/members-portal" role="menuitem">账户</a></li>
+									{% else %}
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/latest" role="menuitem">Latest</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/portfolio" role="menuitem">Portfolio</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/impact" role="menuitem">Impact</a></li>
+										<li class="hs-menu-item hs-menu-depth-1 active" role="none" ><a href="https://shop.zujugp.com" role="menuitem" rel="noopener">Shop</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/about-us" role="menuitem">About</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/about-rewards" role="menuitem">Rewards</a></li>
+										<!--<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://nft.zujugp.com" role="menuitem">Collectibles</a></li>-->
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.zujugp.com/members-portal" role="menuitem">Account</a></li>
+									{% endcase %}
+								</ul>
+              </div>
+            </span>
+            {% comment %}
+            {% if request_contact.is_logged_in %}
+              <a class="nav__link" href="/_hcms/mem/logout">Logout</a>
+            {% else %}
+              <a class="nav__link" href="/_hcms/mem/login">Login</a>
+            {% endif %}
+            {% endcomment %}
+
+            <div class="off-canvas">
+              <svg
+                width="31"
+                height="31"
+                viewBox="0 0 31 31"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.35783 1.35787L29.6421 29.6421"
+                  stroke="#ED2938"
+                  stroke-linecap="square"
+                />
+                <path
+                  d="M29.6421 1.35786L1.35783 29.6421"
+                  stroke="#ED2938"
+                  stroke-linecap="square"
+                />
+              </svg>
+
+              <!-- Off canvas -->
+              <ul class="off-canvas__menu">
+								{% case myLang %}
+									{% when "zh-CN" %}
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/latest" role="menuitem">最新发布</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/portfolio" role="menuitem">更多模块</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/impact" role="menuitem">影响力</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://shop.zujugp.com/{{request.locale.iso_code}}" role="menuitem" rel="noopener" >商城</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/about-us" role="menuitem">关于</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/{{request.locale.iso_code}}/about-rewards" role="menuitem">奖励</a></li>
+										<!--<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://nft.zujugp.com" role="menuitem">Collectibles</a></li>-->
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.zujugp.com/{{request.locale.iso_code}}/members-portal" role="menuitem">账户</a></li>
+									{% else %}
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/latest" role="menuitem">Latest</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/portfolio" role="menuitem">Portfolio</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/impact" role="menuitem">Impact</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://shop.zujugp.com" role="menuitem" rel="noopener" >Shop</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/about-us" role="menuitem">About</a></li>
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="//www.zujugp.com/about-rewards" role="menuitem">Rewards</a></li>
+										<!--<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://nft.zujugp.com" role="menuitem">Collectibles</a></li>-->
+										<li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.zujugp.com/members-portal" role="menuitem">Account</a></li>
+									{% endcase %}
+              </ul>
+            </div>
+
+            <!-- Burger menu -->
+            <div class="burger-menu">
+              <div class="burger-menu__item"></div>
+              <div class="burger-menu__item"></div>
+              <div class="burger-menu__item"></div>
+            </div>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- END -->
+  </header>
+</div>
+
+{% schema %}
+{
+	"name":{
+		"en" : "Header",
+		"zh-CN": "主菜单"
+	},
+	"settings": [
+		{
+			"type": "text",
+			"id": "test_menu",
+			"label":"menu"
+		}
+	],
+	"blocks": [
+		{
+			"type": "text",
+			"name": "Menu",
+			"settings": [
+				{
+					"type": "header",
+					"content":"Navigation"
+				},
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Menu Name"
+				},
+				{
+					"type":"url",
+					"id":"url",
+					"label": "URL"
+				},
+				{
+					"type":"checkbox",
+					"id":"isHighlight",
+					"label":"Highlighted"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

@@ -1,9 +1,12 @@
 {% assign img_url = type | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
 
 {% if grid_style == 'grid' %}
-  <div class="card__image-wrapper card__image-wrapper--aligned" style="padding-top:{{ 0.8 | divided_by: type.aspect_ratio | times: 100}}%">
 
-    <img class="card__image card__image--align lazyload fade-in"
+  <div class="card__image-wrapper card__image-wrapper--aligned" style="padding-top:{{ 0.8 | divided_by: type.aspect_ratio | times: 100}}%">
+    {% unless product.available %}
+			<span><img src="{{ 'sold-out-tag.svg' | asset_url }}" class="soldout-tag"></span>
+		{%endunless%}	
+		<img class="card__image card__image--align lazyload fade-in"
       src="{{ type | img_url: '300x'}}"
       data-parent-fit="cover"
       data-src="{{ img_url }}"
@@ -16,6 +19,9 @@
   </div>
 {% else %}
   <div class="card__image-wrapper" style="padding-top:{{ 1 | divided_by: type.aspect_ratio | times: 100}}%">
+		{% unless product.available %}
+			<span><img src="{{ 'sold-out-tag.svg' | asset_url }}" class="soldout-tag"></span>
+		{%endunless%}	
     <img class="card__image lazyload fade-in"
       data-src="{{ img_url }}"
       data-widths="[180, 220, 300, 360, 460, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
@@ -27,6 +33,9 @@
 
     <noscript>
       {% assign card_image = type | img_url: '1024x1024' %}
+			{% unless product.available %}
+				<span><img src="{{ 'sold-out-tag.svg' | asset_url }}" class="soldout-tag"></span>
+			{%endunless%}	
       <img src="{{ card_image }}" alt="{{ type.alt | escape }}" class="card__image">
     </noscript>
   </div>
